@@ -1,152 +1,480 @@
-import React, { useLayoutEffect, useRef } from "react";
-import { createRoot } from "react-dom/client";
-import Lenis from "lenis";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
-import "lenis/dist/lenis.css";
+import React, {useEffect, useRef, useState} from "react";
+import {createRoot} from "react-dom/client";
+import {gsap} from "gsap";
+import {SplitText} from "gsap/SplitText";
 import "./styles.css";
-
+import KineticFAQ from "../KineticFAQ";
+import KineticScrollFill from "../KineticScrollFill";
+import KineticSmoothScroll from "../KineticSmoothScroll";
 import VantaBeforeAfter from "../VantaBeforeAfter";
 import VantaPackageBuilder from "../VantaPackageBuilder";
 import VantaReviews from "../VantaReviews";
 import VantaServices from "../VantaServices";
 import VantaSpeedo from "../VantaSpeedo";
 import VantaTread from "../VantaTread";
-import KineticCubeText from "../KineticCubeText";
-import KineticCubeSection from "../KineticCubeSection";
-import KineticFAQ from "../KineticFAQ";
-import KineticHoverRow from "../KineticHoverRow";
-import KineticScrollFill from "../KineticScrollFill";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+type Component = React.ComponentType<any> & {defaultProps?: Record<string, unknown>};
+const render = (C: Component, overrides: Record<string, unknown> = {}) =>
+  React.createElement(C, {...C.defaultProps, ...overrides});
 
-type FramerComponent = React.ComponentType<any> & { defaultProps?: Record<string, unknown> };
-const component = (Component: FramerComponent, overrides: Record<string, unknown> = {}) =>
-  React.createElement(Component, { ...Component.defaultProps, ...overrides });
+const services = [
+  {
+    category: "Polimento",
+    title: "Polimento técnico",
+    price: "Consultar",
+    duration: "1–2 dias",
+    blurb: "Correção precisa para recuperar profundidade e brilho da pintura.",
+    link: "#contact",
+    badge: "Mais procurado",
+  },
+  {
+    category: "Polimento",
+    title: "Polimento comercial",
+    price: "Consultar",
+    duration: "1 dia",
+    blurb: "Acabamento rápido e uniforme para renovar a aparência do veículo.",
+    link: "#contact",
+    badge: "",
+  },
+  {
+    category: "Lavagem",
+    title: "Lavagem técnica detalhada",
+    price: "Consultar",
+    duration: "3–4 horas",
+    blurb: "Limpeza cuidadosa por dentro, por fora e em cada acabamento.",
+    link: "#contact",
+    badge: "",
+  },
+  {
+    category: "Lavagem",
+    title: "Lavagem tradicional",
+    price: "Consultar",
+    duration: "1–2 horas",
+    blurb: "O essencial bem feito para manter seu carro sempre pronto.",
+    link: "#contact",
+    badge: "",
+  },
+  {
+    category: "Lavagem",
+    title: "Lavagem de chassi",
+    price: "Consultar",
+    duration: "3 horas",
+    blurb: "Remoção profunda de resíduos nas partes inferiores do veículo.",
+    link: "#contact",
+    badge: "",
+  },
+  {
+    category: "Restauração",
+    title: "Revitalização de faróis",
+    price: "Consultar",
+    duration: "2 horas",
+    blurb: "Mais transparência, segurança e presença para o conjunto óptico.",
+    link: "#contact",
+    badge: "",
+  },
+  {
+    category: "Interior",
+    title: "Higienização de bancos",
+    price: "Consultar",
+    duration: "4 horas",
+    blurb: "Limpeza profunda dos tecidos, couro e superfícies internas.",
+    link: "#contact",
+    badge: "",
+  },
+  {
+    category: "Proteção",
+    title: "Vitrificação",
+    price: "Consultar",
+    duration: "1–2 dias",
+    blurb: "Proteção de longa duração com brilho intenso e toque sedoso.",
+    link: "#contact",
+    badge: "Premium",
+  },
+];
+const comparisonItems = [
+  "Polimento técnico",
+  "Lavagem detalhada",
+  "Revitalização de faróis",
+  "Higienização de bancos",
+  "Vitrificação",
+];
+const packages = services.map((s, i) => ({
+  name: s.title,
+  price: [180, 90, 120, 60, 100, 130, 180, 450][i],
+  note: s.blurb,
+}));
 
-function MotionSetup() {
-  const root = useRef<HTMLDivElement>(null);
+gsap.registerPlugin(SplitText);
 
-  useLayoutEffect(() => {
-    const lenis = new Lenis({ smoothWheel: true, lerp: 0.09 });
-    lenis.on("scroll", ScrollTrigger.update);
-    const tick = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
-
-    const ctx = gsap.context(() => {
-      const headings = gsap.utils.toArray<HTMLElement>(".gsap-heading");
-      headings.forEach((heading) => {
-        const split = SplitText.create(heading, { type: "words, chars", wordsClass: "word++", charsClass: "char" });
-        gsap.from(split.chars, {
-          yPercent: 110,
-          opacity: 0,
-          rotate: 3,
-          duration: 0.8,
-          stagger: 0.018,
-          ease: "power3.out",
-          scrollTrigger: { trigger: heading, start: "top 88%", once: true },
-        });
+function MultiCursorTitle() {
+  const root = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const lines = Array.from(el.querySelectorAll<HTMLElement>("[data-line]"));
+    const chars: HTMLElement[] = [];
+    const words: {start: number; count: number; cursor: HTMLSpanElement; bar: HTMLSpanElement; spot: number}[] = [];
+    const layer = document.createElement("div");
+    layer.className = "cursors";
+    layer.setAttribute("aria-hidden", "true");
+    lines.forEach((line) => {
+      const split = SplitText.create(line, {type: "words, chars", wordsClass: "word", charsClass: "char"});
+      split.words.forEach((word) => {
+        const wordChars = split.chars.filter((char) => word.contains(char));
+        const cursor = document.createElement("span");
+        cursor.className = "cursor";
+        const bar = document.createElement("span");
+        bar.className = "cursor__bar";
+        cursor.append(bar);
+        layer.append(cursor);
+        const start = chars.length;
+        words.push({start, count: wordChars.length, cursor, bar, spot: start * 2});
+        chars.push(...wordChars);
       });
-      gsap.utils.toArray<HTMLElement>(".gsap-copy").forEach((el) => {
-        gsap.from(el, {
-          y: 24,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 90%", once: true },
-        });
+      line.classList.add("is-ready");
+    });
+    el.append(layer);
+    const measure = () => {
+      const base = el.getBoundingClientRect();
+      const spots = chars.flatMap((char) => {
+        const r = char.getBoundingClientRect();
+        return [
+          {x: r.left - base.left, y: r.top - base.top},
+          {x: r.right - base.left, y: r.top - base.top},
+        ];
       });
-    }, root);
-
+      words.forEach((word) => {
+        const spot = spots[word.spot] || {x: 0, y: 0};
+        gsap.set(word.cursor, {x: spot.x, y: spot.y});
+      });
+      return spots;
+    };
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const spots = measure();
+    if (reduced) gsap.set(chars, {opacity: 1});
+    else {
+      gsap.set(chars, {opacity: 0});
+      const tl = gsap.timeline();
+      const keyTimes: number[] = [];
+      let clock = 0.15;
+      const keyAt = (i: number) => {
+        while (keyTimes.length <= i) {
+          clock += 0.065 * gsap.utils.random(0.65, 1.35);
+          keyTimes.push(clock);
+        }
+        return keyTimes[i];
+      };
+      words.forEach((word, wordIndex) => {
+        const land = 0.15 + wordIndex * 0.035;
+        tl.set(word.cursor, {autoAlpha: 1}, land).fromTo(
+          word.bar,
+          {scaleY: 0},
+          {scaleY: 1, duration: 0.15, ease: "expo.out"},
+          land,
+        );
+        for (let i = 0; i < word.count; i++) {
+          const index = word.start + i;
+          const time = keyAt(wordIndex + i + 1);
+          tl.set(chars[index], {opacity: 1}, time).call(
+            () => {
+              const spot = spots[index * 2 + 1] || {x: 0, y: 0};
+              gsap.set(word.cursor, {x: spot.x, y: spot.y});
+            },
+            [],
+            time,
+          );
+        }
+        tl.to(word.cursor, {autoAlpha: 0, duration: 0.25}, keyAt(wordIndex + word.count + 1) + 0.08);
+      });
+      const last = words[words.length - 1];
+      if (last)
+        tl.set(last.cursor, {autoAlpha: 1}, ">+=.1").to(
+          last.cursor,
+          {autoAlpha: 0, duration: 0.16, repeat: 3, yoyo: true},
+          ">+=.16",
+        );
+    }
+    const onResize = () => measure();
+    window.addEventListener("resize", onResize);
     return () => {
-      ctx.revert();
-      gsap.ticker.remove(tick);
-      lenis.destroy();
+      window.removeEventListener("resize", onResize);
+      gsap.killTweensOf([...chars, ...words.map((word) => word.cursor)]);
+      layer.remove();
+      lines.forEach((line) => line.replaceChildren(...Array.from(line.childNodes)));
     };
   }, []);
-
-  return <div ref={root} className="page-shell">
-    <header className="site-header">
-      <a className="brand" href="#top" aria-label="Vanta Studio início">VANTA<span>®</span></a>
-      <nav aria-label="Navegação principal">
-        <a href="#servicos">Serviços</a><a href="#studio">O studio</a><a href="#avaliacoes">Avaliações</a>
-      </nav>
-      <a className="header-cta" href="#contato">Agendar horário <span>↗</span></a>
-    </header>
-
-    <main id="top">
-      <section className="hero section-pad">
-        <div className="hero-copy">
-          <p className="eyebrow gsap-copy"><span className="status-dot" /> ESTÉTICA AUTOMOTIVA · SÃO PAULO</p>
-          <h1 className="gsap-heading">Seu carro.<br /><em>Em outro nível.</em></h1>
-          <p className="hero-lede gsap-copy">Cuidado técnico e acabamento impecável para quem sabe que cada detalhe faz diferença.</p>
-          <div className="hero-actions gsap-copy"><a className="button button-primary" href="#servicos">Conheça os serviços <span>↘</span></a><span className="hero-note">DETAILING COM PROPÓSITO<br />DESDE 2018</span></div>
-        </div>
-        <div className="hero-art" aria-label="Ilustração abstrata de carro esportivo">
-          <div className="art-grid" /><div className="art-glow" />
-          <div className="car-line"><span className="car-roof" /><span className="car-body" /><i className="wheel wheel-one" /><i className="wheel wheel-two" /></div>
-          <span className="art-caption">VANTA / 001<br />PAINT CORRECTION</span><span className="art-index">01 — 04</span>
-        </div>
-        <div className="hero-bottom"><span>PRECISÃO EM CADA PASSADA</span><span>SCROLL PARA EXPLORAR ↓</span></div>
-      </section>
-
-      <section className="intro section-pad" id="studio">
-        <div className="section-kicker">01 / NOSSA FILOSOFIA</div>
-        <div className="intro-content"><h2 className="gsap-heading">Não é só limpeza.<br /><span>É respeito pela máquina.</span></h2><p className="gsap-copy">Tratamos cada veículo como único. Com técnica, produtos selecionados e atenção que você percebe no primeiro olhar — e em cada quilômetro depois.</p></div>
-      </section>
-
-      <section className="services section-pad" id="servicos">
-        <div className="section-heading"><div><div className="section-kicker">02 / O QUE FAZEMOS</div><h2 className="gsap-heading">Serviços feitos<br />para durar.</h2></div><p className="gsap-copy">Do cuidado essencial à correção completa.<br />Escolha o que seu carro precisa.</p></div>
-        {component(VantaServices, { columns: 3, buttonLabel: "Ver detalhes" })}
-      </section>
-
-      <section className="transformation section-pad">
-        <div className="section-heading"><div><div className="section-kicker">03 / ANTES E DEPOIS</div><h2 className="gsap-heading">A diferença está<br />nos detalhes.</h2></div><p className="gsap-copy">Arraste para comparar o resultado.<br />Nosso trabalho fala por si.</p></div>
-        <div className="comparison">{component(VantaBeforeAfter, { style: { width: "100%", height: "min(58vw, 620px)" } })}</div>
-      </section>
-
-      <section className="stats section-pad">
-        <div className="stats-intro"><div className="section-kicker">04 / NOSSO PADRÃO</div><h2 className="gsap-heading">Confiança<br />se constrói.</h2><p className="gsap-copy">Cada número representa um carro cuidado com o mesmo compromisso.</p></div>
-        <div className="stats-gauges">{component(VantaSpeedo, { columns: 2, gap: 36 })}</div>
-      </section>
-
-      <section className="quote-band section-pad">
-        <span className="quote-mark">“</span>
-        {component(KineticScrollFill, { text: "O cuidado certo faz o carro *parecer novo* de novo. E faz você lembrar por que se apaixonou por ele.", size: 48, start: 95, end: 38 })}
-      </section>
-
-      <section className="reviews section-pad" id="avaliacoes">
-        <div className="section-heading"><div><div className="section-kicker">05 / QUEM CONFIA</div><h2 className="gsap-heading">Palavra de quem<br />já sentiu a diferença.</h2></div><span className="rating gsap-copy">★★★★★ <small>4,9 / 5</small></span></div>
-        {component(VantaReviews, { rows: 1, cardWidth: 340 })}
-      </section>
-
-      <section className="booking section-pad" id="contato">
-        <div className="section-heading"><div><div className="section-kicker">06 / SEU PRÓXIMO PASSO</div><h2 className="gsap-heading">Monte seu<br />cuidado ideal.</h2></div><p className="gsap-copy">Personalize uma estimativa de acordo<br />com seu veículo e suas prioridades.</p></div>
-        <div className="builder-wrap">{component(VantaPackageBuilder, { currency: "R$ ", link: "mailto:oi@vantastudio.com.br" })}</div>
-      </section>
-
-      <section className="faq section-pad">
-        <div className="section-heading"><div><div className="section-kicker">07 / DÚVIDAS FREQUENTES</div><h2 className="gsap-heading">Tudo claro.<br />Desde o começo.</h2></div></div>
-        {component(KineticFAQ, {})}
-      </section>
-
-      <section className="work-list section-pad">
-        <div className="section-kicker">08 / NOSSO JEITO DE CUIDAR</div>
-        <div className="work-row">{component(KineticHoverRow, { index: "01", title: "Detalhe que transforma", client: "Vanta Studio", category: "Polimento técnico", year: "2026", size: 72 })}</div>
-      </section>
-
-      {component(KineticCubeSection, { mode: "Once", content: <section className="final-cta section-pad">
-        <div className="section-kicker">SEU CARRO MERECE ESSE CUIDADO</div>
-        {component(KineticCubeText, { text: "VAMOS CUIDAR?", size: 108, color: "#F4F1EC" })}
-        <a className="button button-primary" href="mailto:oi@vantastudio.com.br">Fale com a Vanta <span>↗</span></a>
-      </section> })}
-    </main>
-
-    <footer className="site-footer section-pad"><div className="footer-top"><a className="brand" href="#top">VANTA<span>®</span></a><p>O cuidado que seu carro<br />merece, sem atalhos.</p><a href="#contato">Agende seu horário ↗</a></div><div className="footer-bottom"><span>© 2026 VANTA STUDIO</span><span>SÃO PAULO, BRASIL</span><span>FEITO COM ATENÇÃO A CADA DETALHE</span></div></footer>
-    <div className="tread-strip" aria-hidden="true">{component(VantaTread, { text: "VANTA STUDIO · DETAILING · VANTA STUDIO · DETAILING ·", speed: 0.35 })}</div>
-  </div>;
+  return (
+    <h1 ref={root} className="hero-title multi-cursor" data-effect="multi-cursor">
+      <span data-line>SUA NAVE LIMPA</span>
+      <br />
+      <span data-line>
+        <em>SEMPRE</em>
+      </span>
+    </h1>
+  );
 }
 
-createRoot(document.getElementById("root")!).render(<React.StrictMode><MotionSetup /></React.StrictMode>);
+function AudioControl() {
+  const audio = useRef<HTMLAudioElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const toggle = () => {
+    if (!audio.current) return;
+    if (audio.current.paused)
+      audio.current
+        .play()
+        .then(() => setPlaying(true))
+        .catch(() => undefined);
+    else {
+      audio.current.pause();
+      setPlaying(false);
+    }
+  };
+  useEffect(() => {
+    const start = () =>
+      audio.current
+        ?.play()
+        .then(() => setPlaying(true))
+        .catch(() => undefined);
+    window.addEventListener("pointerdown", start, {once: true});
+    return () => window.removeEventListener("pointerdown", start);
+  }, []);
+  return (
+    <>
+      <audio ref={audio} loop preload="auto" autoPlay src="/audio/car-wash.mp3" />
+      <button className="sound-control" onClick={toggle} aria-label="Alternar som ambiente">
+        <span>{playing ? "Ⅱ" : "♪"}</span>
+        <small>{playing ? "som ligado" : "som ambiente"}</small>
+      </button>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <>
+        {render(KineticSmoothScroll)}
+        <AudioControl />
+      </>
+      <header className="site-nav">
+        <a className="logo" href="#top">
+          POLI<span>ART</span>
+        </a>
+        <nav>
+          <a href="#services">Serviços</a>
+          <a href="#work">Antes & depois</a>
+          <a href="#pricing">Preços</a>
+          <a href="#contact">Contato</a>
+        </nav>
+        <a className="nav-whatsapp" href="https://wa.me/5516999756680" target="_blank" rel="noreferrer">
+          WhatsApp ↗
+        </a>
+      </header>
+      <main id="top">
+        <section className="hero">
+          <img className="hero-image" src="/image/hero.jpg" alt="Carro em processo de detalhamento" />
+          <div className="hero-shade" />
+          <div className="hero-content">
+            <p className="eyebrow">POLIART · ESTÉTICA AUTOMOTIVA</p>
+            <MultiCursorTitle />
+          </div>
+          <div className="hero-caption">
+            <span>
+              Floriano Peixoto, 212 / Centro
+              <br />
+              Jaboticabal — SP (Fundo)
+            </span>
+            <span>
+              Carros & motos
+              <br />
+              Seg–Sáb / 8h às 18h
+            </span>
+          </div>
+        </section>
+        <section className="statement section-pad">
+          <p className="section-label">01 / NOSSA ESSÊNCIA</p>
+          <div>
+            <h2>
+              Seu carro merece
+              <br />
+              <span>mais que uma lavagem.</span>
+            </h2>
+            <p>
+              Na PoliArt, cada veículo recebe atenção, técnica e o cuidado de quem entende que estética também é
+              preservação. Do primeiro contato ao último reflexo.
+            </p>
+          </div>
+        </section>
+        <section className="services section-pad" id="services">
+          <div className="section-head">
+            <div>
+              <p className="section-label">02 / SERVIÇOS</p>
+              <h2>
+                Cuidado em
+                <br />
+                <span>cada detalhe.</span>
+              </h2>
+            </div>
+            <p>
+              Escolha o serviço ideal para
+              <br />
+              carros e motos.
+            </p>
+          </div>
+          {render(VantaServices, {
+            services,
+            allLabel: "Todos",
+            buttonLabel: "Saiba mais",
+            columns: 3,
+            tabletColumns: 2,
+            phoneColumns: 1,
+            accent: "#7e0607",
+            cardFill: "#151515",
+            textColor: "#fff",
+            mutedColor: "rgba(255,255,255,.62)",
+          })}
+        </section>
+        <section className="comparison-section section-pad" id="work">
+          <div className="section-head">
+            <div>
+              <p className="section-label">03 / ANTES & DEPOIS</p>
+              <h2>
+                A diferença
+                <br />
+                <span>é visível.</span>
+              </h2>
+            </div>
+            <p>
+              Arraste para revelar o resultado.
+              <br />
+              No celular, toque e deslize.
+            </p>
+          </div>
+          <div className="comparison-grid">
+            {comparisonItems.map((item, i) => (
+              <article className="comparison-item" key={item}>
+                <div className="comparison-title">
+                  <span>0{i + 1}</span>
+                  <strong>{item}</strong>
+                </div>
+                {render(VantaBeforeAfter, {
+                  before: {src: "/image/hero.jpg", alt: `${item} antes`},
+                  after: {src: "/image/hero.jpg", alt: `${item} depois`},
+                  beforeLabel: "Antes",
+                  afterLabel: "Depois",
+                  accent: "#7e0607",
+                  style: {width: "100%", height: 310},
+                })}
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="stats section-pad">
+          <div>
+            <p className="section-label">04 / NOSSO PADRÃO</p>
+            <h2>
+              Resultado que
+              <br />
+              <span>fala por si.</span>
+            </h2>
+            <p className="stats-copy">
+              Um cuidado consistente em cada serviço, para seu carro sair sempre melhor do que entrou.
+            </p>
+          </div>
+          {render(VantaSpeedo, {columns: 2, phoneColumns: 2, accent: "#7e0607", textColor: "#fff"})}
+        </section>
+        <section className="pricing section-pad" id="pricing">
+          <div className="section-head">
+            <div>
+              <p className="section-label">05 / PREÇOS</p>
+              <h2>
+                Monte seu
+                <br />
+                <span>cuidado ideal.</span>
+              </h2>
+            </div>
+            <p>
+              Escolha o tamanho do veículo
+              <br />e o serviço desejado.
+            </p>
+          </div>
+          {render(VantaPackageBuilder, {
+            packages,
+            extras: [],
+            currency: "R$ ",
+            packageTitle: "Serviço",
+            extrasTitle: "Adicionais",
+            totalLabel: "Estimativa",
+            buttonLabel: "Chamar no WhatsApp",
+            link: "https://wa.me/5516999756680",
+            footnote: "Valor estimado. Confirmamos após avaliar o veículo.",
+            accent: "#7e0607",
+            panel: "#151515",
+            textColor: "#fff",
+          })}
+        </section>
+        <section className="reviews section-pad">
+          <div className="section-head">
+            <div>
+              <p className="section-label">06 / CLIENTES</p>
+              <h2>
+                Quem cuida,
+                <br />
+                <span>recomenda.</span>
+              </h2>
+            </div>
+          </div>
+          {render(VantaReviews, {rows: 1, accent: "#7e0607", cardFill: "#151515", textColor: "#fff"})}
+        </section>
+        <section className="sensory section-pad">
+          <p className="section-label">07 / A EXPERIÊNCIA POLIART</p>
+          {render(KineticScrollFill, {
+            text: "Mais brilho. Mais proteção. Mais *PoliArt.*",
+            size: 56,
+            color: "#fff",
+            accent: "#7e0607",
+          })}
+          {render(VantaTread, {
+            text: "POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA ·",
+            textColor: "#7e0607",
+          })}
+        </section>
+        <section className="faq section-pad">
+          <div className="section-head">
+            <div>
+              <p className="section-label">08 / DÚVIDAS</p>
+              <h2>
+                Tudo claro
+                <br />
+                <span>desde o começo.</span>
+              </h2>
+            </div>
+          </div>
+          {render(KineticFAQ, {accent: "#7e0607", textColor: "#fff"})}
+        </section>
+        <section className="contact section-pad" id="contact">
+          <p className="section-label">SEU CARRO MERECE ESSE CUIDADO</p>
+          <h2>Vamos cuidar?</h2>
+          <p>Fale com a PoliArt pelo WhatsApp.</p>
+          <a className="contact-button" href="https://wa.me/5516999756680" target="_blank" rel="noreferrer">
+            Falar pelo WhatsApp ↗
+          </a>
+        </section>
+      </main>
+      <footer className="footer section-pad">
+        <a className="logo" href="#top">
+          POLI<span>ART</span>
+        </a>
+        <span>© 2026 POLIART · JABOTICABAL — SP</span>
+        <a href="https://www.instagram.com/_poliart_/" target="_blank" rel="noreferrer">
+          @_poliart_ ↗
+        </a>
+      </footer>
+    </>
+  );
+}
+createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
