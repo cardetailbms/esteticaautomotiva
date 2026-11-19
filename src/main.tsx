@@ -21,7 +21,7 @@ const services = [
   {
     category: "Polimento",
     title: "Polimento técnico",
-    price: "Consultar",
+    price: "R$ 180",
     duration: "1–2 dias",
     blurb: "Correção precisa para recuperar profundidade e brilho da pintura.",
     link: "#contact",
@@ -30,7 +30,7 @@ const services = [
   {
     category: "Polimento",
     title: "Polimento comercial",
-    price: "Consultar",
+    price: "R$ 90",
     duration: "1 dia",
     blurb: "Acabamento rápido e uniforme para renovar a aparência do veículo.",
     link: "#contact",
@@ -39,7 +39,7 @@ const services = [
   {
     category: "Lavagem",
     title: "Lavagem técnica detalhada",
-    price: "Consultar",
+    price: "R$ 120",
     duration: "3–4 horas",
     blurb: "Limpeza cuidadosa por dentro, por fora e em cada acabamento.",
     link: "#contact",
@@ -48,7 +48,7 @@ const services = [
   {
     category: "Lavagem",
     title: "Lavagem tradicional",
-    price: "Consultar",
+    price: "R$ 60",
     duration: "1–2 horas",
     blurb: "O essencial bem feito para manter seu carro sempre pronto.",
     link: "#contact",
@@ -57,7 +57,7 @@ const services = [
   {
     category: "Lavagem",
     title: "Lavagem de chassi",
-    price: "Consultar",
+    price: "R$ 100",
     duration: "3 horas",
     blurb: "Remoção profunda de resíduos nas partes inferiores do veículo.",
     link: "#contact",
@@ -66,7 +66,7 @@ const services = [
   {
     category: "Restauração",
     title: "Revitalização de faróis",
-    price: "Consultar",
+    price: "R$ 130",
     duration: "2 horas",
     blurb: "Mais transparência, segurança e presença para o conjunto óptico.",
     link: "#contact",
@@ -75,7 +75,7 @@ const services = [
   {
     category: "Interior",
     title: "Higienização de bancos",
-    price: "Consultar",
+    price: "R$ 180",
     duration: "4 horas",
     blurb: "Limpeza profunda dos tecidos, couro e superfícies internas.",
     link: "#contact",
@@ -84,7 +84,7 @@ const services = [
   {
     category: "Proteção",
     title: "Vitrificação",
-    price: "Consultar",
+    price: "R$ 450",
     duration: "1–2 dias",
     blurb: "Proteção de longa duração com brilho intenso e toque sedoso.",
     link: "#contact",
@@ -205,8 +205,8 @@ function MultiCursorTitle() {
   }, []);
   return (
     <h1 ref={root} className="hero-title multi-cursor" data-effect="multi-cursor">
-      <span data-line>SUA NAVE LIMPA</span>
-      <br />
+      <span data-line>EXCÊLENCIA EM CADA DETALHE</span>
+
       <span data-line>
         <em>SEMPRE</em>
       </span>
@@ -291,49 +291,39 @@ function App() {
             </span>
           </div>
         </section>
-        <section className="statement section-pad">
-          <p className="section-label">01 / NOSSA ESSÊNCIA</p>
-          <div>
-            <h2>
-              Seu carro merece
-              <br />
-              <span>mais que uma lavagem.</span>
-            </h2>
-            <p>
-              Na PoliArt, cada veículo recebe atenção, técnica e o cuidado de quem entende que estética também é
-              preservação. Do primeiro contato ao último reflexo.
-            </p>
-          </div>
-        </section>
+
+        {/* Seção de Serviços */}
         <section className="services section-pad" id="services">
           <div className="section-head">
             <div>
-              <p className="section-label">02 / SERVIÇOS</p>
+              <p className="section-label">SERVIÇOS</p>
               <h2>
-                Cuidado em
+                O QUE VOCÊ
                 <br />
-                <span>cada detalhe.</span>
+                <span>PRECISA?</span>
               </h2>
             </div>
             <p>
-              Escolha o serviço ideal para
+              Todos os serviços são feitos à mão
               <br />
-              carros e motos.
+              em nosso estúdio ou na sua casa.
             </p>
           </div>
           {render(VantaServices, {
             services,
             allLabel: "Todos",
-            buttonLabel: "Saiba mais",
+            buttonLabel: "Contrate",
             columns: 3,
             tabletColumns: 2,
             phoneColumns: 1,
             accent: "#7e0607",
             cardFill: "#151515",
             textColor: "#fff",
-            mutedColor: "rgba(255,255,255,.62)",
+            mutedColor: "rgba(255, 255, 255, 0.62)",
           })}
         </section>
+
+        {/* Seção de Antes & Depois */}
         <section className="comparison-section section-pad" id="work">
           <div className="section-head">
             <div>

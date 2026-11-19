@@ -121,7 +121,7 @@ function Card({s, i, p, shown, isStatic}: {s: Service; i: number; p: Props; show
               padding: "6px 10px",
               borderRadius: 999,
               background: p.accent,
-              color: "#0b0b0c",
+              color: "#fff",
               ...p.metaFont,
               textTransform: "uppercase" as const,
             }}>
@@ -140,6 +140,7 @@ function Card({s, i, p, shown, isStatic}: {s: Service; i: number; p: Props; show
             backdropFilter: "blur(6px)",
             WebkitBackdropFilter: "blur(6px)",
             ...p.metaFont,
+            fontSize: 10,
             textTransform: "uppercase" as const,
           }}>
           {s.duration}
@@ -163,7 +164,8 @@ function Card({s, i, p, shown, isStatic}: {s: Service; i: number; p: Props; show
             style={{
               ...p.metaFont,
               textTransform: "uppercase" as const,
-              color: p.accent,
+              color: p.textColor,
+              fontWeight: 700,
             }}>
             {s.category}
           </span>
@@ -171,6 +173,7 @@ function Card({s, i, p, shown, isStatic}: {s: Service; i: number; p: Props; show
             style={{
               ...p.titleFont,
               color: p.textColor,
+              fontWeight: 700,
               whiteSpace: "nowrap",
             }}>
             {s.price}
@@ -198,7 +201,7 @@ function Card({s, i, p, shown, isStatic}: {s: Service; i: number; p: Props; show
           borderRadius: 999,
           background: hover ? p.accent : "transparent",
           border: `1px solid ${hover ? p.accent : p.lineColor}`,
-          color: hover ? "#0b0b0c" : p.textColor,
+          color: p.textColor,
           textDecoration: "none",
           transition: "background .3s ease, color .3s ease, border-color .3s ease",
           ...p.bodyFont,
@@ -214,7 +217,7 @@ function Card({s, i, p, shown, isStatic}: {s: Service; i: number; p: Props; show
             display: "grid",
             placeItems: "center",
             background: hover ? "#0b0b0c" : p.accent,
-            color: hover ? p.accent : "#0b0b0c",
+            color: "#fff",
             transform: hover ? "rotate(-45deg)" : "none",
             transition: `transform .4s ${EASE}`,
           }}>
@@ -291,7 +294,7 @@ export default function VantaServices(props: Props) {
           cursor: "pointer",
           border: `1px solid ${on ? p.accent : p.lineColor}`,
           background: on ? p.accent : "transparent",
-          color: on ? "#0b0b0c" : p.textColor,
+          color: p.textColor,
           transition: "background .3s ease, color .3s ease, border-color .3s ease",
         }}>
         {label}
