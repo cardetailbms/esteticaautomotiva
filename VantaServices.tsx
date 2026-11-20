@@ -119,7 +119,7 @@ function Card({s, i, p, shown, isStatic}: {s: Service; i: number; p: Props; show
               top: 12,
               left: 12,
               padding: "6px 10px",
-              borderRadius: 999,
+              borderRadius: 0,
               background: p.accent,
               color: "#fff",
               ...p.metaFont,
@@ -134,7 +134,7 @@ function Card({s, i, p, shown, isStatic}: {s: Service; i: number; p: Props; show
             bottom: 12,
             right: 12,
             padding: "8px 12px",
-            borderRadius: 999,
+            borderRadius: 0,
             background: "rgba(8,8,9,.72)",
             color: p.textColor,
             backdropFilter: "blur(6px)",
@@ -169,15 +169,17 @@ function Card({s, i, p, shown, isStatic}: {s: Service; i: number; p: Props; show
             }}>
             {s.category}
           </span>
-          <span
-            style={{
-              ...p.titleFont,
-              color: p.textColor,
-              fontWeight: 700,
-              whiteSpace: "nowrap",
-            }}>
-            {s.price}
-          </span>
+          {s.price && p.buttonLabel ? (
+            <span
+              style={{
+                ...p.titleFont,
+                color: p.textColor,
+                fontWeight: 700,
+                whiteSpace: "nowrap",
+              }}>
+              {s.price}
+            </span>
+          ) : null}
         </div>
         <h3
           style={{
@@ -190,40 +192,42 @@ function Card({s, i, p, shown, isStatic}: {s: Service; i: number; p: Props; show
         </h3>
         <p style={{...p.bodyFont, color: p.mutedColor, margin: 0}}>{s.blurb}</p>
       </div>
-      <a
-        href={s.link || "#contact"}
-        style={{
-          marginTop: "auto",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "12px 12px 12px 18px",
-          borderRadius: 999,
-          background: hover ? p.accent : "transparent",
-          border: `1px solid ${hover ? p.accent : p.lineColor}`,
-          color: p.textColor,
-          textDecoration: "none",
-          transition: "background .3s ease, color .3s ease, border-color .3s ease",
-          ...p.bodyFont,
-          fontWeight: 600,
-        }}>
-        {p.buttonLabel}
-        <span
-          aria-hidden="true"
+      {p.buttonLabel ? (
+        <a
+          href={s.link || "#contact"}
           style={{
-            width: 30,
-            height: 30,
-            borderRadius: "50%",
-            display: "grid",
-            placeItems: "center",
-            background: hover ? "#0b0b0c" : p.accent,
-            color: "#fff",
-            transform: hover ? "rotate(-45deg)" : "none",
-            transition: `transform .4s ${EASE}`,
+            marginTop: "auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "12px 12px 12px 18px",
+            borderRadius: 0,
+            background: hover ? p.accent : "transparent",
+            border: `1px solid ${hover ? p.accent : p.lineColor}`,
+            color: p.textColor,
+            textDecoration: "none",
+            transition: "background .3s ease, color .3s ease, border-color .3s ease",
+            ...p.bodyFont,
+            fontWeight: 600,
           }}>
-          →
-        </span>
-      </a>
+          {p.buttonLabel}
+          <span
+            aria-hidden="true"
+            style={{
+              width: 30,
+              height: 30,
+              borderRadius: 0,
+              display: "grid",
+              placeItems: "center",
+              background: hover ? "#0b0b0c" : p.accent,
+              color: "#fff",
+              transform: hover ? "rotate(-45deg)" : "none",
+              transition: `transform .4s ${EASE}`,
+            }}>
+            →
+          </span>
+        </a>
+      ) : null}
     </article>
   );
 }
@@ -290,7 +294,7 @@ export default function VantaServices(props: Props) {
           ...p.metaFont,
           textTransform: "uppercase" as const,
           padding: "10px 16px",
-          borderRadius: 999,
+          borderRadius: 0,
           cursor: "pointer",
           border: `1px solid ${on ? p.accent : p.lineColor}`,
           background: on ? p.accent : "transparent",

@@ -173,39 +173,39 @@ export default function VantaReviews(props: Props) {
 
 const DEFAULT_REVIEWS: Review[] = [
   {
-    quote: "Picked it up and honestly thought they'd swapped my car for a new one.",
+    quote: "Peguei o carro e juro que achei que tinham trocado pelo zero km.",
     name: "Jordan P.",
-    car: "Black SUV",
+    car: "SUV preto",
     rating: 5,
   },
   {
-    quote: "Ten years of swirl marks gone in a weekend. Water just runs off it now.",
+    quote: "Dez anos de riscos de espiral sumidos num fim de semana. A água escorrega como espelho agora.",
     name: "Amira K.",
-    car: "Grey sedan",
+    car: "Sedan cinza",
     rating: 5,
   },
   {
-    quote: "They did our whole fleet at the depot before the morning shift. Zero downtime.",
+    quote: "Fizeram toda a nossa frota no depósito antes do turno da manhã. Sem parar nada.",
     name: "Lewis T.",
-    car: "Work vans",
+    car: "Vans de trabalho",
     rating: 5,
   },
   {
-    quote: "The interior smells like nothing, which after two kids and a dog is a miracle.",
+    quote: "O interior não cheira a nada — depois de dois filhos e um cachorro, isso é milagre.",
     name: "Priya S.",
-    car: "Family wagon",
+    car: "Familiar",
     rating: 5,
   },
   {
-    quote: "Clear explanation of what my paint needed, no upsell, and a finish that stops people in the street.",
+    quote: "Explicaram direto o que a pintura precisava, sem empurrar extra. O resultado para o trânsito.",
     name: "Marco D.",
-    car: "Classic coupe",
+    car: "Coupé clássico",
     rating: 5,
   },
   {
-    quote: "Booked online, they came to me, done before lunch.",
+    quote: "Agendei online, vieram até mim, pronto antes do almoço.",
     name: "Hannah W.",
-    car: "White hatch",
+    car: "Hatch branco",
     rating: 4,
   },
 ];

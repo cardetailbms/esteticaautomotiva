@@ -21,7 +21,7 @@ const services = [
   {
     category: "Polimento",
     title: "Polimento técnico",
-    price: "R$ 180",
+    price: "Consultar",
     duration: "1–2 dias",
     blurb: "Correção precisa para recuperar profundidade e brilho da pintura.",
     link: "#contact",
@@ -30,7 +30,7 @@ const services = [
   {
     category: "Polimento",
     title: "Polimento comercial",
-    price: "R$ 90",
+    price: "Consultar",
     duration: "1 dia",
     blurb: "Acabamento rápido e uniforme para renovar a aparência do veículo.",
     link: "#contact",
@@ -39,7 +39,7 @@ const services = [
   {
     category: "Lavagem",
     title: "Lavagem técnica detalhada",
-    price: "R$ 120",
+    price: "Consultar",
     duration: "3–4 horas",
     blurb: "Limpeza cuidadosa por dentro, por fora e em cada acabamento.",
     link: "#contact",
@@ -48,7 +48,7 @@ const services = [
   {
     category: "Lavagem",
     title: "Lavagem tradicional",
-    price: "R$ 60",
+    price: "Consultar",
     duration: "1–2 horas",
     blurb: "O essencial bem feito para manter seu carro sempre pronto.",
     link: "#contact",
@@ -57,7 +57,7 @@ const services = [
   {
     category: "Lavagem",
     title: "Lavagem de chassi",
-    price: "R$ 100",
+    price: "Consultar",
     duration: "3 horas",
     blurb: "Remoção profunda de resíduos nas partes inferiores do veículo.",
     link: "#contact",
@@ -66,7 +66,7 @@ const services = [
   {
     category: "Restauração",
     title: "Revitalização de faróis",
-    price: "R$ 130",
+    price: "Consultar",
     duration: "2 horas",
     blurb: "Mais transparência, segurança e presença para o conjunto óptico.",
     link: "#contact",
@@ -75,7 +75,7 @@ const services = [
   {
     category: "Interior",
     title: "Higienização de bancos",
-    price: "R$ 180",
+    price: "Consultar",
     duration: "4 horas",
     blurb: "Limpeza profunda dos tecidos, couro e superfícies internas.",
     link: "#contact",
@@ -84,7 +84,7 @@ const services = [
   {
     category: "Proteção",
     title: "Vitrificação",
-    price: "R$ 450",
+    price: "Consultar",
     duration: "1–2 dias",
     blurb: "Proteção de longa duração com brilho intenso e toque sedoso.",
     link: "#contact",
@@ -297,7 +297,13 @@ function App() {
           <div className="section-head">
             <div>
               <p className="section-label">SERVIÇOS</p>
-              <h2>
+              <h2 style={{
+                fontWeight: 900,
+                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
+                letterSpacing: "1px",
+                lineHeight: 1.0,
+                textTransform: "uppercase",
+              }}>
                 O QUE VOCÊ
                 <br />
                 <span>PRECISA?</span>
@@ -312,7 +318,7 @@ function App() {
           {render(VantaServices, {
             services,
             allLabel: "Todos",
-            buttonLabel: "Contrate",
+            buttonLabel: "",
             columns: 3,
             tabletColumns: 2,
             phoneColumns: 1,
@@ -328,7 +334,13 @@ function App() {
           <div className="section-head">
             <div>
               <p className="section-label">03 / ANTES & DEPOIS</p>
-              <h2>
+              <h2 style={{
+                fontWeight: 900,
+                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
+                letterSpacing: "1px",
+                lineHeight: 1.0,
+                textTransform: "uppercase",
+              }}>
                 A diferença
                 <br />
                 <span>é visível.</span>
@@ -353,25 +365,30 @@ function App() {
                   beforeLabel: "Antes",
                   afterLabel: "Depois",
                   accent: "#7e0607",
-                  style: {width: "100%", height: 310},
+                  style: {width: "100%", aspectRatio: "1 / 1", height: "auto"},
                 })}
               </article>
             ))}
           </div>
         </section>
         <section className="stats section-pad">
-          <div>
+          <div className="stats-head" style={{textAlign: "center", marginBottom: "clamp(40px, 6vw, 80px)"}}>
             <p className="section-label">04 / NOSSO PADRÃO</p>
-            <h2>
-              Resultado que
-              <br />
-              <span>fala por si.</span>
+            <h2
+              style={{
+                fontWeight: 900,
+                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
+                letterSpacing: "1px",
+                lineHeight: 1.0,
+                textTransform: "uppercase",
+              }}>
+              Resultado que<br /><span>fala por si.</span>
             </h2>
-            <p className="stats-copy">
+            <p className="stats-copy" style={{maxWidth: "52ch", margin: "1.5rem auto 0"}}>
               Um cuidado consistente em cada serviço, para seu carro sair sempre melhor do que entrou.
             </p>
           </div>
-          {render(VantaSpeedo, {columns: 2, phoneColumns: 2, accent: "#7e0607", textColor: "#fff"})}
+          {render(VantaSpeedo, {columns: 4, phoneColumns: 2, accent: "#7e0607", textColor: "#fff"})}
         </section>
         <section className="pricing section-pad" id="pricing">
           <div className="section-head">
@@ -407,7 +424,13 @@ function App() {
           <div className="section-head">
             <div>
               <p className="section-label">06 / CLIENTES</p>
-              <h2>
+              <h2 style={{
+                fontWeight: 900,
+                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
+                letterSpacing: "1px",
+                lineHeight: 1.0,
+                textTransform: "uppercase",
+              }}>
                 Quem cuida,
                 <br />
                 <span>recomenda.</span>
@@ -433,7 +456,13 @@ function App() {
           <div className="section-head">
             <div>
               <p className="section-label">08 / DÚVIDAS</p>
-              <h2>
+              <h2 style={{
+                fontWeight: 900,
+                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
+                letterSpacing: "1px",
+                lineHeight: 1.0,
+                textTransform: "uppercase",
+              }}>
                 Tudo claro
                 <br />
                 <span>desde o começo.</span>

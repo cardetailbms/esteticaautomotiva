@@ -248,29 +248,29 @@ export default function KineticFAQ(props: Props) {
 
 const DEFAULT_ITEMS: QA[] = [
   {
-    question: "What does KYBRE actually design?",
+    question: "Preciso levar o carro até vocês?",
     answer:
-      "Robots for real homes: humanoid helpers, robot vacuums, companions and the software that makes them feel calm to live with. We take a product from first sketch to the version you can build at scale.",
+      "Não necessariamente. Oferecemos atendimento no nosso estúdio em Jaboticabal e também na sua casa ou empresa, dependendo do serviço. Fale com a gente para combinar.",
   },
   {
-    question: "Do you only work with robotics companies?",
+    question: "Quanto tempo leva cada serviço?",
     answer:
-      "Mostly. We also partner with appliance brands and research labs moving into robotics, as long as the product will live around people.",
+      "Uma lavagem completa leva em torno de 1h30. Polimento técnico ou correção de pintura pode levar de 1 a 2 dias. Revestimento cerâmico, 2 dias. Confirmamos o prazo na avaliação.",
   },
   {
-    question: "How long does a typical project take?",
+    question: "O carro precisa estar sujo para agendar?",
     answer:
-      "A focused sprint (concept, form and interaction) takes 6–8 weeks. A full product, through engineering and pilot builds, usually runs 9–14 months.",
+      "Não. Mas recomendamos não lavar antes de uma inspeção de pintura, para conseguirmos avaliar o estado real da superfície.",
   },
   {
-    question: "Can you help with manufacturing?",
+    question: "Vocês trabalham com motos?",
     answer:
-      "Yes. Our hardware team designs for manufacture from day one and stays on through prototyping, tooling and the first production run.",
+      "Sim. Atendemos carros e motos com os mesmos padrões de acabamento.",
   },
   {
-    question: "How do we start?",
+    question: "Como faço para agendar?",
     answer:
-      "Send a short note about what you're building. We'll come back within two working days with questions, not a sales deck.",
+      "Pelo WhatsApp. É a forma mais rápida. Respondemos em até dois dias úteis com disponibilidade e orientações.",
   },
 ];
 

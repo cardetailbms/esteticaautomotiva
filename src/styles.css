@@ -237,6 +237,15 @@ a {
     margin-top: 18px
 }
 
+.services .section-head h2,
+.comparison-section h2,
+.stats h2,
+.reviews .section-head h2,
+.faq h2 {
+    font-weight: 900 !important;
+    letter-spacing: 1px !important
+}
+
 .section-head>p {
     margin: 0 0 8px
 }
@@ -289,20 +298,11 @@ a {
 .stats {
     padding-top: 140px;
     padding-bottom: 140px;
-    background: #0b0b0b;
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 8vw;
-    align-items: center
+    background: #0b0b0b
 }
 
 .stats-copy {
     margin-left: 0
-}
-
-.stats>div:last-child {
-    border-left: 1px solid var(--line);
-    padding-left: 7vw
 }
 
 .pricing {
@@ -508,12 +508,6 @@ a {
         display: block;
         padding-top: 95px;
         padding-bottom: 95px
-    }
-
-    .stats>div:last-child {
-        border-left: 0;
-        padding-left: 0;
-        margin-top: 50px
     }
 
     .faq {
