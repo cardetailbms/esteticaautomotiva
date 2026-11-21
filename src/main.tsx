@@ -9,9 +9,9 @@ import KineticSmoothScroll from "../KineticSmoothScroll";
 import VantaBeforeAfter from "../VantaBeforeAfter";
 import VantaPackageBuilder from "../VantaPackageBuilder";
 import VantaReviews from "../VantaReviews";
-import VantaServices from "../VantaServices";
 import VantaSpeedo from "../VantaSpeedo";
 import VantaTread from "../VantaTread";
+import ServicesSection from "../ServicesSection";
 
 type Component = React.ComponentType<any> & {defaultProps?: Record<string, unknown>};
 const render = (C: Component, overrides: Record<string, unknown> = {}) =>
@@ -21,73 +21,57 @@ const services = [
   {
     category: "Polimento",
     title: "Polimento técnico",
-    price: "Consultar",
     duration: "1–2 dias",
     blurb: "Correção precisa para recuperar profundidade e brilho da pintura.",
-    link: "#contact",
     badge: "Mais procurado",
   },
   {
     category: "Polimento",
     title: "Polimento comercial",
-    price: "Consultar",
     duration: "1 dia",
     blurb: "Acabamento rápido e uniforme para renovar a aparência do veículo.",
-    link: "#contact",
     badge: "",
   },
   {
     category: "Lavagem",
     title: "Lavagem técnica detalhada",
-    price: "Consultar",
     duration: "3–4 horas",
     blurb: "Limpeza cuidadosa por dentro, por fora e em cada acabamento.",
-    link: "#contact",
     badge: "",
   },
   {
     category: "Lavagem",
     title: "Lavagem tradicional",
-    price: "Consultar",
     duration: "1–2 horas",
     blurb: "O essencial bem feito para manter seu carro sempre pronto.",
-    link: "#contact",
     badge: "",
   },
   {
     category: "Lavagem",
     title: "Lavagem de chassi",
-    price: "Consultar",
     duration: "3 horas",
     blurb: "Remoção profunda de resíduos nas partes inferiores do veículo.",
-    link: "#contact",
     badge: "",
   },
   {
     category: "Restauração",
     title: "Revitalização de faróis",
-    price: "Consultar",
     duration: "2 horas",
     blurb: "Mais transparência, segurança e presença para o conjunto óptico.",
-    link: "#contact",
     badge: "",
   },
   {
     category: "Interior",
     title: "Higienização de bancos",
-    price: "Consultar",
     duration: "4 horas",
     blurb: "Limpeza profunda dos tecidos, couro e superfícies internas.",
-    link: "#contact",
     badge: "",
   },
   {
     category: "Proteção",
     title: "Vitrificação",
-    price: "Consultar",
     duration: "1–2 dias",
     blurb: "Proteção de longa duração com brilho intenso e toque sedoso.",
-    link: "#contact",
     badge: "Premium",
   },
 ];
@@ -272,7 +256,15 @@ function App() {
       </header>
       <main id="top">
         <section className="hero">
-          <img className="hero-image" src="/image/hero.jpg" alt="Carro em processo de detalhamento" />
+          <img
+            className="hero-image"
+            src="/image/hero.jpg"
+            alt="Hatch branco em estúdio escuro com fumaça e luz vermelhas"
+            width={1366}
+            height={768}
+            fetchPriority="high"
+            decoding="async"
+          />
           <div className="hero-shade" />
           <div className="hero-content">
             <p className="eyebrow">POLIART · ESTÉTICA AUTOMOTIVA</p>
@@ -293,17 +285,11 @@ function App() {
         </section>
 
         {/* Seção de Serviços */}
-        <section className="services section-pad" id="services">
+        <section className="services section-pad on-paper" id="services" aria-labelledby="services-title">
           <div className="section-head">
             <div>
               <p className="section-label">SERVIÇOS</p>
-              <h2 style={{
-                fontWeight: 900,
-                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
-                letterSpacing: "1px",
-                lineHeight: 1.0,
-                textTransform: "uppercase",
-              }}>
+              <h2 id="services-title">
                 O QUE VOCÊ
                 <br />
                 <span>PRECISA?</span>
@@ -315,18 +301,7 @@ function App() {
               em nosso estúdio ou na sua casa.
             </p>
           </div>
-          {render(VantaServices, {
-            services,
-            allLabel: "Todos",
-            buttonLabel: "",
-            columns: 3,
-            tabletColumns: 2,
-            phoneColumns: 1,
-            accent: "#7e0607",
-            cardFill: "#151515",
-            textColor: "#fff",
-            mutedColor: "rgba(255, 255, 255, 0.62)",
-          })}
+          <ServicesSection services={services} />
         </section>
 
         {/* Seção de Antes & Depois */}
