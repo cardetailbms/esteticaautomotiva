@@ -99,28 +99,29 @@ a {
 
 .site-nav nav {
     display: flex;
-    gap: 36px
+    gap: clamp(20px, 2.5vw, 36px)
 }
 
-.site-nav nav a,
-.nav-whatsapp {
-    font: 11px var(--mono);
-    letter-spacing: .05em;
+.site-nav nav a, .nav-whatsapp {
+    font: 500 var(--t-label)/1 var(--mono);
+    letter-spacing: var(--track-label);
+    color: var(--ink);
     text-decoration: none;
     text-transform: uppercase;
-    color: #ddd
 }
-
-.site-nav nav a:hover,
-.nav-whatsapp:hover {
-    color: #fff
-}
+.site-nav nav a:hover, .site-nav nav a:focus-visible { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
 
 .nav-whatsapp {
-    border: 1px solid var(--line);
-    padding: 12px 15px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--s-4);
+    border: 1px solid var(--ink);
     border-radius: 0
 }
+.nav-whatsapp:hover { background: var(--ink); color: var(--on-ink); }
+.skip-link { position: absolute; left: var(--s-4); top: -100px; z-index: 100; padding: var(--s-3) var(--s-4); background: var(--ink); color: var(--on-ink); font: 700 14px/1 var(--font-body); text-decoration: none; }
+.skip-link:focus { top: var(--s-4); }
 
 .hero {
     position: relative;
@@ -159,8 +160,7 @@ a {
 }
 
 .eyebrow,
-.hero-caption,
-.footer {
+.hero-caption {
     font: 10px var(--mono);
     letter-spacing: .12em;
     color: var(--muted)
@@ -436,20 +436,20 @@ h2 {
 .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4) var(--s-6); }
 .contact-actions p { margin: 0; font-size: var(--t-body); line-height: 1.6; color: var(--muted); }
 
-.footer {
-    border-top: 1px solid var(--line);
-    padding-top: 28px;
-    padding-bottom: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 9px
+.footer { padding-top: var(--s-9); padding-bottom: var(--s-6); overflow: hidden; }
+.footer-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-7) var(--s-6); }
+@media (max-width: 800px) { .footer-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .footer-cols { grid-template-columns: 1fr; } }
+.footer-title { margin: 0 0 var(--s-4); font: 500 var(--t-label)/1.4 var(--mono); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); }
+.footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-3); }
+.footer ul a, .footer address { font-size: var(--t-body); line-height: 1.6; font-style: normal; color: var(--ink); text-decoration: none; }
+.footer ul a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.footer-wordmark {
+  display: block; margin-top: var(--s-9); overflow: hidden; white-space: nowrap; text-decoration: none; text-transform: uppercase;
+  font-family: var(--font-display); font-weight: var(--w-display); font-size: 25vw; line-height: .85; letter-spacing: var(--track-display); color: var(--ink);
 }
-
-.footer>a:last-child {
-    color: var(--red-bright);
-    text-decoration: none
-}
+.footer-wordmark span { color: var(--red-bright); }
+.footer-base { margin: var(--s-6) 0 0; padding-top: var(--s-5); border-top: 1px solid var(--line); font: 500 var(--t-label)/1.5 var(--mono); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); }
 
 .sound-control {
     position: fixed;
@@ -479,21 +479,9 @@ h2 {
     color: var(--on-ink);
 }
 
-.sound-control:hover span {
-    color: var(--on-ink);
-}
-
-.sound-control span {
-    color: #fff;
-    font-size: 16px
-}
-
-.sound-control small {
-    font: 500 var(--t-label)/1.4 var(--mono);
-    color: inherit;
-    letter-spacing: var(--track-label);
-    text-transform: uppercase;
-}
+.sound-control span { font: 500 var(--t-label)/1.4 var(--mono); letter-spacing: var(--track-label); text-transform: uppercase; }
+.sound-control:disabled { opacity: .5; cursor: not-allowed; }
+.sound-control:disabled:hover { background: var(--black); color: var(--ink); }
 
 .comparison-item [style*="height"] {
     max-width: 100%
@@ -509,8 +497,7 @@ h2 {
     }
 
     .nav-whatsapp {
-        font-size: 9px;
-        padding: 9px
+        padding: 0 var(--s-3)
     }
 
     .hero {
@@ -551,16 +538,6 @@ h2 {
     }
 
     .reviews { padding-top: var(--pad-y); padding-bottom: var(--pad-y); }
-
-    .footer {
-        gap: 18px;
-        flex-wrap: wrap
-    }
-
-    .footer>span {
-        order: 3;
-        width: 100%
-    }
 
 }
 

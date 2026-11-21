@@ -253,34 +253,23 @@ function MultiCursorTitle() {
 
 function AudioControl() {
   const audio = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
+  const [on, setOn] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
   const toggle = () => {
-    if (!audio.current) return;
-    if (audio.current.paused)
-      audio.current
-        .play()
-        .then(() => setPlaying(true))
-        .catch(() => undefined);
-    else {
-      audio.current.pause();
-      setPlaying(false);
-    }
+    const el = audio.current;
+    if (!el || unavailable) return;
+    if (el.paused) el.play().then(() => setOn(true)).catch(() => undefined);
+    else { el.pause(); setOn(false); }
   };
-  useEffect(() => {
-    const start = () =>
-      audio.current
-        ?.play()
-        .then(() => setPlaying(true))
-        .catch(() => undefined);
-    window.addEventListener("pointerdown", start, {once: true});
-    return () => window.removeEventListener("pointerdown", start);
-  }, []);
   return (
     <>
-      <audio ref={audio} loop preload="auto" autoPlay src="/audio/car-wash.mp3" />
-      <button className="sound-control" onClick={toggle} aria-label="Alternar som ambiente">
-        <span>{playing ? "Ⅱ" : "♪"}</span>
-        <small>{playing ? "som ligado" : "som ambiente"}</small>
+      <audio ref={audio} loop preload="metadata" src="/audio/car-wash.mp3" onError={() => setUnavailable(true)} />
+      <button type="button" className="sound-control" onClick={toggle} aria-pressed={on} disabled={unavailable}
+        title={unavailable ? "Som ambiente em breve" : undefined}>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          {on ? <path d="M8 5v14M16 5v14" /> : <><path d="M9 18V5l11-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="17" cy="16" r="3" /></>}
+        </svg>
+        <span>Som ambiente</span>
       </button>
     </>
   );
@@ -289,6 +278,7 @@ function AudioControl() {
 function App() {
   return (
     <>
+      <a className="skip-link" href="#top">Pular para o conteúdo</a>
       <>
         {render(KineticSmoothScroll)}
         <AudioControl />
@@ -297,13 +287,13 @@ function App() {
         <a className="logo" href="#top">
           POLI<span>ART</span>
         </a>
-        <nav>
+        <nav aria-label="Principal">
           <a href="#services">Serviços</a>
           <a href="#work">Antes & depois</a>
           <a href="#pricing">Preços</a>
           <a href="#contact">Contato</a>
         </nav>
-        <a className="nav-whatsapp" href="https://wa.me/5516999756680" target="_blank" rel="noreferrer">
+        <a className="nav-whatsapp" href="https://wa.me/5516999756680" target="_blank" rel="noopener noreferrer">
           WhatsApp ↗
         </a>
       </header>
@@ -507,13 +497,39 @@ function App() {
         </section>
       </main>
       <footer className="footer section-pad">
-        <a className="logo" href="#top">
-          POLI<span>ART</span>
-        </a>
-        <span>© 2026 POLIART · JABOTICABAL — SP</span>
-        <a href="https://www.instagram.com/_poliart_/" target="_blank" rel="noreferrer">
-          @_poliart_ ↗
-        </a>
+        <div className="footer-cols">
+          <nav aria-label="Rodapé">
+            <p className="footer-title">Explorar</p>
+            <ul>
+              <li><a href="#services">Serviços</a></li>
+              <li><a href="#work">Antes &amp; depois</a></li>
+              <li><a href="#pricing">Preços</a></li>
+              <li><a href="#contact">Contato</a></li>
+            </ul>
+          </nav>
+          <div>
+            <p className="footer-title">Contato</p>
+            <ul>
+              <li><a href="https://wa.me/5516999756680" target="_blank" rel="noopener noreferrer">(16) 99975-6680</a></li>
+            </ul>
+          </div>
+          <div>
+            <p className="footer-title">Estúdio</p>
+            <address>
+              Floriano Peixoto, 212<br />
+              Centro, Jaboticabal — SP (Fundo)<br />
+              Seg–Sáb · 8h às 18h
+            </address>
+          </div>
+          <div>
+            <p className="footer-title">Seguir</p>
+            <ul>
+              <li><a href="https://www.instagram.com/_poliart_/" target="_blank" rel="noopener noreferrer">@_poliart_ ↗</a></li>
+            </ul>
+          </div>
+        </div>
+        <a className="footer-wordmark" href="#top" aria-label="PoliArt, voltar ao topo">POLI<span>ART</span></a>
+        <p className="footer-base">© 2026 POLIART · JABOTICABAL — SP</p>
       </footer>
     </>
   );
