@@ -7,11 +7,11 @@ import KineticFAQ from "../KineticFAQ";
 import KineticScrollFill from "../KineticScrollFill";
 import KineticSmoothScroll from "../KineticSmoothScroll";
 import VantaBeforeAfter from "../VantaBeforeAfter";
-import VantaPackageBuilder from "../VantaPackageBuilder";
-import VantaReviews from "../VantaReviews";
+import PricingBuilder from "../PricingBuilder";
 import VantaSpeedo from "../VantaSpeedo";
 import VantaTread from "../VantaTread";
 import ServicesSection from "../ServicesSection";
+import ReviewsSection from "../ReviewsSection";
 
 type Component = React.ComponentType<any> & {defaultProps?: Record<string, unknown>};
 const render = (C: Component, overrides: Record<string, unknown> = {}) =>
@@ -87,6 +87,24 @@ const packages = services.map((s, i) => ({
   price: [180, 90, 120, 60, 100, 130, 180, 450][i],
   note: s.blurb,
 }));
+
+// ATENÇÃO: depoimentos de EXEMPLO. Substituir por avaliações REAIS de clientes da PoliArt (ex.: Google) antes de publicar.
+const reviews = [
+  { quote: "Fiz o polimento técnico e a pintura voltou a ter brilho de carro novo.", name: "Rafael M.", car: "Sedan prata", rating: 5 },
+  { quote: "Os faróis estavam amarelados e ficaram transparentes de novo. A diferença é enorme.", name: "Camila S.", car: "Hatch branco", rating: 5 },
+  { quote: "Higienizaram os bancos e o cheiro do carro mudou completamente.", name: "Eduardo L.", car: "SUV preto", rating: 5 },
+  { quote: "Atendimento claro: explicaram o que o carro precisava e o valor antes de começar.", name: "Fernanda A.", car: "Sedan cinza", rating: 5 },
+  { quote: "Levei a moto para lavar e ficou impecável, até nos detalhes.", name: "Lucas P.", car: "Moto esportiva", rating: 5 },
+  { quote: "Serviço muito bem feito. Só precisei esperar um pouco mais que o combinado.", name: "Juliana R.", car: "Hatch vermelho", rating: 4 },
+];
+
+// CONFIRMAR com o cliente: preços dos serviços (packages) e multiplicadores por tamanho de veículo.
+const sizes = [
+  {label: "Hatch / Compacto", factor: 0.9},
+  {label: "Sedan", factor: 1},
+  {label: "SUV / Picape", factor: 1.2},
+  {label: "Van / 7 lugares", factor: 1.4},
+];
 
 // ATENÇÃO: valores PROVISÓRIOS de exemplo. Substituir pelos números reais da PoliArt antes de publicar.
 const stats = [
@@ -379,11 +397,11 @@ function App() {
             labelFont: {fontFamily: "var(--mono)", fontSize: 13, fontWeight: 500, letterSpacing: "1.5px", lineHeight: 1.4},
           })}
         </section>
-        <section className="pricing section-pad" id="pricing">
+        <section className="pricing section-pad" id="pricing" aria-labelledby="pricing-title">
           <div className="section-head">
             <div>
               <p className="section-label">05 / PREÇOS</p>
-              <h2>
+              <h2 id="pricing-title">
                 Monte seu
                 <br />
                 <span>cuidado ideal.</span>
@@ -394,39 +412,26 @@ function App() {
               <br />e o serviço desejado.
             </p>
           </div>
-          {render(VantaPackageBuilder, {
-            packages,
-            extras: [],
-            currency: "R$ ",
-            packageTitle: "Serviço",
-            extrasTitle: "Adicionais",
-            totalLabel: "Estimativa",
-            buttonLabel: "Chamar no WhatsApp",
-            link: "https://wa.me/5516999756680",
-            footnote: "Valor estimado. Confirmamos após avaliar o veículo.",
-            accent: "#7e0607",
-            panel: "#151515",
-            textColor: "#fff",
-          })}
+          <PricingBuilder
+            sizes={sizes}
+            packages={packages}
+            whatsapp="https://wa.me/5516999756680"
+            footnote="Valor estimado. Confirmamos após avaliar o veículo."
+          />
         </section>
-        <section className="reviews section-pad">
+        <section className="reviews section-pad on-paper" aria-labelledby="reviews-title">
           <div className="section-head">
             <div>
               <p className="section-label">06 / CLIENTES</p>
-              <h2 style={{
-                fontWeight: 900,
-                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
-                letterSpacing: "1px",
-                lineHeight: 1.0,
-                textTransform: "uppercase",
-              }}>
+              <h2 id="reviews-title">
                 Quem cuida,
                 <br />
                 <span>recomenda.</span>
               </h2>
             </div>
           </div>
-          {render(VantaReviews, {rows: 1, accent: "#7e0607", cardFill: "#151515", textColor: "#fff"})}
+          <p className="reviews-note" role="note">Depoimentos de exemplo</p>
+          <ReviewsSection reviews={reviews} />
         </section>
         <section className="sensory section-pad">
           <p className="section-label">07 / A EXPERIÊNCIA POLIART</p>
