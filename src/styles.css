@@ -221,7 +221,6 @@ a {
 .eyebrow, .hero-caption { font-size: var(--t-label); }
 
 .statement,
-.comparison-section,
 .pricing,
 .reviews,
 .faq {
@@ -229,6 +228,8 @@ a {
     padding-top: 135px;
     padding-bottom: 145px
 }
+
+.comparison-section { padding-top: var(--pad-y); padding-bottom: var(--pad-y); }
 
 .statement {
     display: grid;
@@ -288,51 +289,14 @@ h2 {
     margin: 0 0 8px
 }
 
-.comparison-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 34px 18px
-}
-
-.comparison-item {
-    min-width: 0
-}
-
-.comparison-item:last-child {
-    grid-column: span 2;
-    max-width: calc(50% - 9px)
-}
-
-.comparison-title {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    margin-bottom: 13px;
-    font: var(--t-label) var(--mono);
-    text-transform: uppercase
-}
-
-.comparison-title span {
-    color: var(--red-bright)
-}
-
-.comparison-title strong {
-    font-weight: 400
-}
-
-.comparison-item>div:last-child {
-    border: 1px solid var(--line);
-    padding: 6px
-}
-
-.stats {
-    padding-top: 140px;
-    padding-bottom: 140px;
-    background: #0b0b0b
-}
-
-.stats-copy {
-    margin-left: 0
+.stats { padding-top: var(--pad-y); padding-bottom: var(--pad-y); }
+.stats-head { text-align: center; margin-bottom: clamp(40px, 6vw, 80px); }
+.stats-head .section-label { margin: 0; }
+.stats-copy { max-width: 52ch; margin: var(--s-5) auto 0; }
+.stats-note {
+    max-width: 70ch; margin: var(--s-2) auto var(--s-3);
+    font: 500 var(--t-label)/1.5 var(--mono); letter-spacing: var(--track-label);
+    text-align: center; color: var(--muted);
 }
 
 .pricing {
@@ -538,28 +502,11 @@ h2 {
         margin: 23px 0 0
     }
 
-    .comparison-section,
     .pricing,
     .reviews,
     .faq {
         padding-top: 90px;
         padding-bottom: 100px
-    }
-
-    .comparison-grid {
-        display: block
-    }
-
-    .comparison-item,
-    .comparison-item:last-child {
-        max-width: none;
-        margin-bottom: 30px
-    }
-
-    .stats {
-        display: block;
-        padding-top: 95px;
-        padding-bottom: 95px
     }
 
     .faq {
@@ -709,6 +656,27 @@ h2 {
 @media (hover: hover) { .svc-card:hover .svc-media img { transform: scale(1.04); } }
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.comparison-grid { display: grid; grid-template-columns: 1fr; gap: var(--s-8) var(--s-6); }
+.comparison-item { min-width: 0; }
+@media (min-width: 600px) {
+    .comparison-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 900px) {
+    .comparison-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .comparison-item { grid-column: span 2; }
+    .comparison-item:nth-child(-n + 2) { grid-column: span 3; }
+}
+
+.comparison-title { display: flex; align-items: baseline; gap: var(--s-3); margin-bottom: var(--s-3); }
+.comparison-title span { font: 500 var(--t-label)/1 var(--mono); letter-spacing: var(--track-label); color: var(--muted); }
+.comparison-title strong {
+    font-family: var(--font-display); font-weight: var(--w-display); font-size: var(--t-h3);
+    line-height: 1; letter-spacing: var(--track-display); text-transform: uppercase; color: var(--ink);
+}
+
+/* Foco da alça: anel duplo (branco por dentro, preto por fora), visível sobre foto clara ou escura */
+.comparison-item [role="slider"]:focus-visible { outline: 2px solid #fff; outline-offset: 0; box-shadow: 0 0 0 4px #000; }
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

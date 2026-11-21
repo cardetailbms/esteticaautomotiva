@@ -13,6 +13,8 @@ type Img = {src?: string; srcSet?: string; alt?: string};
 interface Props {
   before?: Img;
   after?: Img;
+  label?: string;
+  simulateBefore?: boolean;
   beforeLabel: string;
   afterLabel: string;
   start: number;
@@ -28,13 +30,15 @@ interface Props {
 
 const clamp = (v: number) => Math.max(0, Math.min(100, v));
 
-function Layer({img, dirty, accent}: {img?: Img; dirty: boolean; accent: string}) {
+function Layer({img, dirty, accent, simulate}: {img?: Img; dirty: boolean; accent: string; simulate?: boolean}) {
   if (img && img.src)
     return (
       <img
         src={img.src}
         srcSet={img.srcSet}
         alt={img.alt || ""}
+        loading="lazy"
+        decoding="async"
         draggable={false}
         style={{
           position: "absolute",
@@ -42,6 +46,7 @@ function Layer({img, dirty, accent}: {img?: Img; dirty: boolean; accent: string}
           width: "100%",
           height: "100%",
           objectFit: "cover",
+          filter: dirty && simulate ? "grayscale(.65) contrast(.8) brightness(.7) sepia(.25)" : undefined,
           userSelect: "none",
           pointerEvents: "none",
         }}
@@ -85,6 +90,8 @@ export default function VantaBeforeAfter(props: Props) {
     labelBg,
     lineWidth,
     labelFont,
+    label,
+    simulateBefore,
   } = props;
   const isStatic = useIsStaticRenderer();
   const reduce =
@@ -163,14 +170,11 @@ export default function VantaBeforeAfter(props: Props) {
       <span
         style={{
           position: "absolute",
-          top: 16,
-          [side]: 16,
+          top: 0,
+          [side]: 0,
           padding: "8px 12px",
-          borderRadius: 999,
           background: labelBg,
           color: labelColor,
-          backdropFilter: "blur(6px)",
-          WebkitBackdropFilter: "blur(6px)",
           opacity: show ? 1 : 0,
           transition: "opacity .3s ease",
           pointerEvents: "none",
@@ -192,7 +196,7 @@ export default function VantaBeforeAfter(props: Props) {
         ...props.style,
         position: "relative",
         width: "100%",
-        height: "100%",
+        height: props.style?.height ?? "100%",
         overflow: "hidden",
         borderRadius: radius,
         cursor: isStatic ? "default" : drag ? "grabbing" : "ew-resize",
@@ -207,7 +211,7 @@ export default function VantaBeforeAfter(props: Props) {
           inset: 0,
           clipPath: `inset(0 ${100 - pos}% 0 0)`,
         }}>
-        <Layer img={before} dirty={true} accent={accent} />
+        <Layer img={before} dirty={true} accent={accent} simulate={simulateBefore} />
       </div>
       {tag(beforeLabel, "left", pos > 12)}
       {tag(afterLabel, "right", pos < 88)}
@@ -220,40 +224,38 @@ export default function VantaBeforeAfter(props: Props) {
           width: lineWidth,
           marginLeft: -lineWidth / 2,
           background: accent,
-          boxShadow: `0 0 18px ${accent}`,
           pointerEvents: "none",
         }}
       />
       <div
         role="slider"
         tabIndex={0}
-        aria-label="Compare before and after"
+        aria-label={label ? `Comparar antes e depois: ${label}` : "Comparar antes e depois"}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(pos)}
+        aria-valuetext={`${Math.round(pos)}% do antes visível`}
         onKeyDown={key}
         style={{
           position: "absolute",
           top: "50%",
           left: `${pos}%`,
-          width: 52,
-          height: 52,
-          margin: "-26px 0 0 -26px",
-          borderRadius: "50%",
+          width: 48,
+          height: 48,
+          margin: "-24px 0 0 -24px",
           background: accent,
+          border: "2px solid #fff",
           display: "grid",
           placeItems: "center",
-          boxShadow: "0 10px 30px rgba(0,0,0,.45)",
           transform: drag ? "scale(.9)" : "scale(1)",
           transition: "transform .25s ease",
-          outline: "none",
         }}>
         <svg
           width="22"
           height="22"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#0b0b0c"
+          stroke="#fff"
           strokeWidth="2.4"
           strokeLinecap="round"
           strokeLinejoin="round">
@@ -265,15 +267,15 @@ export default function VantaBeforeAfter(props: Props) {
 }
 
 VantaBeforeAfter.defaultProps = {
-  beforeLabel: "Before",
-  afterLabel: "After",
+  beforeLabel: "Antes",
+  afterLabel: "Depois",
   start: 50,
   introSweep: true,
-  radius: 18,
-  accent: "#FF5A1F",
-  labelColor: "#F4F1EC",
-  labelBg: "rgba(8,8,9,0.55)",
-  lineWidth: 3,
+  radius: 0,
+  accent: "#da291c",
+  labelColor: "#fff",
+  labelBg: "#000",
+  lineWidth: 2,
 };
 
 addPropertyControls(VantaBeforeAfter, {

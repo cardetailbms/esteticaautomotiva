@@ -75,18 +75,26 @@ const services = [
     badge: "Premium",
   },
 ];
-const comparisonItems = [
-  "Polimento técnico",
-  "Lavagem detalhada",
-  "Revitalização de faróis",
-  "Higienização de bancos",
-  "Vitrificação",
+const comparisons: {title: string; before?: {src: string; alt: string}; after?: {src: string; alt: string}}[] = [
+  {title: "Polimento técnico"},
+  {title: "Lavagem detalhada"},
+  {title: "Revitalização de faróis"},
+  {title: "Higienização de bancos"},
+  {title: "Vitrificação"},
 ];
 const packages = services.map((s, i) => ({
   name: s.title,
   price: [180, 90, 120, 60, 100, 130, 180, 450][i],
   note: s.blurb,
 }));
+
+// ATENÇÃO: valores PROVISÓRIOS de exemplo. Substituir pelos números reais da PoliArt antes de publicar.
+const stats = [
+  {value: 800, max: 1000, prefix: "", suffix: "+", decimals: 0, label: "Carros atendidos"},
+  {value: 4.9, max: 5, prefix: "", suffix: "/5", decimals: 1, label: "Avaliação média"},
+  {value: 5, max: 10, prefix: "", suffix: " anos", decimals: 0, label: "Experiência"},
+  {value: 100, max: 100, prefix: "", suffix: "%", decimals: 0, label: "Feito à mão"},
+];
 
 gsap.registerPlugin(SplitText);
 
@@ -305,17 +313,11 @@ function App() {
         </section>
 
         {/* Seção de Antes & Depois */}
-        <section className="comparison-section section-pad" id="work">
+        <section className="comparison-section section-pad" id="work" aria-labelledby="work-title">
           <div className="section-head">
             <div>
               <p className="section-label">03 / ANTES & DEPOIS</p>
-              <h2 style={{
-                fontWeight: 900,
-                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
-                letterSpacing: "1px",
-                lineHeight: 1.0,
-                textTransform: "uppercase",
-              }}>
+              <h2 id="work-title">
                 A diferença
                 <br />
                 <span>é visível.</span>
@@ -328,42 +330,54 @@ function App() {
             </p>
           </div>
           <div className="comparison-grid">
-            {comparisonItems.map((item, i) => (
-              <article className="comparison-item" key={item}>
+            {comparisons.map((item, i) => (
+              <article className="comparison-item" key={item.title}>
                 <div className="comparison-title">
                   <span>0{i + 1}</span>
-                  <strong>{item}</strong>
+                  <strong>{item.title}</strong>
                 </div>
                 {render(VantaBeforeAfter, {
-                  before: {src: "/image/hero.jpg", alt: `${item} antes`},
-                  after: {src: "/image/hero.jpg", alt: `${item} depois`},
+                  before: item.before ?? {src: "/image/hero.jpg", alt: `${item.title}, antes`},
+                  after: item.after ?? {src: "/image/hero.jpg", alt: `${item.title}, depois`},
+                  simulateBefore: !item.before,
+                  label: item.title,
                   beforeLabel: "Antes",
                   afterLabel: "Depois",
-                  accent: "#7e0607",
+                  accent: "#da291c",
+                  radius: 0,
+                  lineWidth: 2,
+                  labelColor: "#fff",
+                  labelBg: "#000",
+                  labelFont: {fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: "1.5px"},
                   style: {width: "100%", aspectRatio: "1 / 1", height: "auto"},
                 })}
               </article>
             ))}
           </div>
         </section>
-        <section className="stats section-pad">
-          <div className="stats-head" style={{textAlign: "center", marginBottom: "clamp(40px, 6vw, 80px)"}}>
+        <section className="stats section-pad on-paper" aria-labelledby="standard-title">
+          <div className="stats-head">
             <p className="section-label">04 / NOSSO PADRÃO</p>
-            <h2
-              style={{
-                fontWeight: 900,
-                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
-                letterSpacing: "1px",
-                lineHeight: 1.0,
-                textTransform: "uppercase",
-              }}>
+            <p className="stats-note" role="note">Dados provisórios de exemplo</p>
+            <h2 id="standard-title">
               Resultado que<br /><span>fala por si.</span>
             </h2>
-            <p className="stats-copy" style={{maxWidth: "52ch", margin: "1.5rem auto 0"}}>
+            <p className="stats-copy">
               Um cuidado consistente em cada serviço, para seu carro sair sempre melhor do que entrou.
             </p>
           </div>
-          {render(VantaSpeedo, {columns: 4, phoneColumns: 2, accent: "#7e0607", textColor: "#fff"})}
+          {render(VantaSpeedo, {
+            stats,
+            columns: 4,
+            phoneColumns: 2,
+            gap: 32,
+            accent: "#da291c",
+            textColor: "#111",
+            mutedColor: "#5c5c5c",
+            trackColor: "rgba(0, 0, 0, .14)",
+            numberFont: {fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "clamp(32px, 4.2vw, 56px)", letterSpacing: "1px", lineHeight: 1},
+            labelFont: {fontFamily: "var(--mono)", fontSize: 13, fontWeight: 500, letterSpacing: "1.5px", lineHeight: 1.4},
+          })}
         </section>
         <section className="pricing section-pad" id="pricing">
           <div className="section-head">

@@ -17,6 +17,8 @@ type Stat = {
   label: string;
 };
 
+const fmt = (n: number, d: number) => n.toLocaleString("pt-BR", {minimumFractionDigits: d, maximumFractionDigits: d});
+
 interface Props {
   stats: Stat[];
   columns: number;
@@ -71,6 +73,7 @@ function Gauge({s, run, duration, p, i}: {s: Stat; run: boolean; duration: numbe
   const ticks = Array.from({length: 13}, (_, j) => START + (SWEEP / 12) * j);
   return (
     <div
+      role="listitem"
       onMouseEnter={() => setRev(true)}
       onMouseLeave={() => setRev(false)}
       style={{
@@ -101,15 +104,14 @@ function Gauge({s, run, duration, p, i}: {s: Stat; run: boolean; duration: numbe
             fill="none"
             stroke={p.trackColor}
             strokeWidth="10"
-            strokeLinecap="round"
+            strokeLinecap="butt"
           />
           <path
             d={arc(START, Math.max(START + 0.01, Math.min(START + SWEEP, ang)))}
             fill="none"
             stroke={p.accent}
             strokeWidth="10"
-            strokeLinecap="round"
-            style={{filter: `drop-shadow(0 0 6px ${p.accent})`}}
+            strokeLinecap="butt"
           />
           {ticks.map((a, j) => {
             const r0 = j % 3 === 0 ? 58 : 63,
@@ -135,7 +137,7 @@ function Gauge({s, run, duration, p, i}: {s: Stat; run: boolean; duration: numbe
               transformOrigin: "100px 100px",
               transition: rev ? "transform .5s cubic-bezier(.3,1.6,.5,1)" : "transform .5s ease",
             }}>
-            <line x1="100" y1="108" x2="100" y2="40" stroke={p.accent} strokeWidth="3.5" strokeLinecap="round" />
+            <line x1="100" y1="108" x2="100" y2="40" stroke={p.accent} strokeWidth="3.5" strokeLinecap="butt" />
           </g>
           <circle cx="100" cy="100" r="6" fill={p.textColor} />
         </svg>
@@ -150,10 +152,10 @@ function Gauge({s, run, duration, p, i}: {s: Stat; run: boolean; duration: numbe
             ...p.numberFont,
             fontVariantNumeric: "tabular-nums",
           }}>
-          <span style={visuallyHidden}>{`${s.prefix}${s.value}${s.suffix}`}</span>
+          <span style={visuallyHidden}>{`${s.prefix}${fmt(s.value, s.decimals)}${s.suffix}`}</span>
           <span aria-hidden="true">
             {s.prefix}
-            {shown.toFixed(s.decimals)}
+            {fmt(shown, s.decimals)}
             <span style={{color: p.accent}}>{s.suffix}</span>
           </span>
         </div>
@@ -218,6 +220,7 @@ export default function VantaSpeedo(props: Props) {
   return (
     <div
       ref={root}
+      role="list"
       style={{
         ...p.style,
         width: "100%",
@@ -242,28 +245,28 @@ const visuallyHidden: React.CSSProperties = {
 };
 const DEFAULT_STATS: Stat[] = [
   {
-    value: 2400,
-    max: 3000,
+    value: 800,
+    max: 1000,
     prefix: "",
     suffix: "+",
     decimals: 0,
-    label: "Cars detailed",
+    label: "Carros atendidos",
   },
   {
     value: 4.9,
     max: 5,
     prefix: "",
-    suffix: "★",
+    suffix: "/5",
     decimals: 1,
-    label: "Average review",
+    label: "Avaliação média",
   },
   {
-    value: 9,
-    max: 12,
+    value: 5,
+    max: 10,
     prefix: "",
-    suffix: " yrs",
+    suffix: " anos",
     decimals: 0,
-    label: "Coating warranty",
+    label: "Experiência",
   },
   {
     value: 100,
@@ -271,7 +274,7 @@ const DEFAULT_STATS: Stat[] = [
     prefix: "",
     suffix: "%",
     decimals: 0,
-    label: "Hand finished",
+    label: "Feito à mão",
   },
 ];
 
@@ -281,10 +284,10 @@ VantaSpeedo.defaultProps = {
   phoneColumns: 2,
   gap: 24,
   duration: 2.2,
-  textColor: "#F4F1EC",
-  mutedColor: "rgba(244,241,236,0.6)",
-  accent: "#FF5A1F",
-  trackColor: "rgba(244,241,236,0.14)",
+  textColor: "#111",
+  mutedColor: "#5c5c5c",
+  accent: "#da291c",
+  trackColor: "rgba(0,0,0,.14)",
 };
 
 addPropertyControls(VantaSpeedo, {
