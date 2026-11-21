@@ -10,7 +10,7 @@ import {addPropertyControls, ControlType, useIsStaticRenderer} from "framer";
 
 interface Props {
   text: string;
-  size: number;
+  size: number | string;
   lineHeight: number;
   tracking: number;
   font: React.CSSProperties;

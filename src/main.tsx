@@ -3,7 +3,6 @@ import {createRoot} from "react-dom/client";
 import {gsap} from "gsap";
 import {SplitText} from "gsap/SplitText";
 import "./styles.css";
-import KineticFAQ from "../KineticFAQ";
 import KineticScrollFill from "../KineticScrollFill";
 import KineticSmoothScroll from "../KineticSmoothScroll";
 import VantaBeforeAfter from "../VantaBeforeAfter";
@@ -12,6 +11,7 @@ import VantaSpeedo from "../VantaSpeedo";
 import VantaTread from "../VantaTread";
 import ServicesSection from "../ServicesSection";
 import ReviewsSection from "../ReviewsSection";
+import FaqSection from "../FaqSection";
 
 type Component = React.ComponentType<any> & {defaultProps?: Record<string, unknown>};
 const render = (C: Component, overrides: Record<string, unknown> = {}) =>
@@ -97,6 +97,33 @@ const reviews = [
   { quote: "Levei a moto para lavar e ficou impecável, até nos detalhes.", name: "Lucas P.", car: "Moto esportiva", rating: 5 },
   { quote: "Serviço muito bem feito. Só precisei esperar um pouco mais que o combinado.", name: "Juliana R.", car: "Hatch vermelho", rating: 4 },
 ];
+
+// CONFIRMAR com o cliente: respostas baseadas só em dados já presentes no site. Acrescentar o que for verdade (ex.: atendimento na casa do cliente).
+const faqs = [
+  {
+    question: "Onde fica a PoliArt e qual é o horário?",
+    answer: "Floriano Peixoto, 212, Centro, Jaboticabal – SP (Fundo). Atendemos de segunda a sábado, das 8h às 18h.",
+  },
+  {
+    question: "Vocês atendem carros e motos?",
+    answer: "Sim. Atendemos carros e motos.",
+  },
+  {
+    question: "Quanto tempo leva cada serviço?",
+    answer: "A lavagem tradicional leva de 1 a 2 horas e a lavagem técnica detalhada, de 3 a 4 horas. O polimento técnico leva de 1 a 2 dias. A duração de cada serviço está na seção Serviços.",
+  },
+  {
+    question: "Como faço para agendar?",
+    answer: "Pelo WhatsApp. Na seção Preços você escolhe o tamanho do veículo e o serviço, e o botão já abre a conversa com a sua escolha.",
+  },
+  {
+    question: "O valor da estimativa é o preço final?",
+    answer: "Não. É uma estimativa com base no tamanho do veículo e no serviço escolhido. O valor final é confirmado depois de avaliar o veículo.",
+  },
+];
+
+// TROCAR por /image/cta.jpg (foto de gotas de água sobre pintura escura, com luz vermelha) quando existir.
+const ctaImage = "/image/hero.jpg";
 
 // CONFIRMAR com o cliente: preços dos serviços (packages) e multiplicadores por tamanho de veículo.
 const sizes = [
@@ -433,45 +460,50 @@ function App() {
           <p className="reviews-note" role="note">Depoimentos de exemplo</p>
           <ReviewsSection reviews={reviews} />
         </section>
-        <section className="sensory section-pad">
-          <p className="section-label">07 / A EXPERIÊNCIA POLIART</p>
+        <section className="sensory section-pad" aria-labelledby="sensory-label">
+          <p className="section-label" id="sensory-label">07 / A EXPERIÊNCIA POLIART</p>
           {render(KineticScrollFill, {
             text: "Mais brilho. Mais proteção. Mais *PoliArt.*",
-            size: 56,
+            size: "clamp(40px, 6.4vw, 92px)",
+            lineHeight: 1,
+            tracking: 0.01,
+            font: { fontFamily: "var(--font-display)", fontWeight: 900, textTransform: "uppercase" },
             color: "#fff",
-            accent: "#7e0607",
+            accent: "#da291c",
           })}
-          {render(VantaTread, {
-            text: "POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA ·",
-            textColor: "#7e0607",
-          })}
+          <div className="sensory-tread">
+            {render(VantaTread, {
+              text: "POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA ·",
+              rubber: "#000",
+              groove: "#303030",
+              textColor: "#da291c",
+              font: { fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 26, letterSpacing: "3px" },
+            })}
+          </div>
         </section>
-        <section className="faq section-pad">
+        <section className="faq section-pad on-paper" id="faq" aria-labelledby="faq-title">
           <div className="section-head">
             <div>
               <p className="section-label">08 / DÚVIDAS</p>
-              <h2 style={{
-                fontWeight: 900,
-                fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
-                letterSpacing: "1px",
-                lineHeight: 1.0,
-                textTransform: "uppercase",
-              }}>
+              <h2 id="faq-title">
                 Tudo claro
                 <br />
                 <span>desde o começo.</span>
               </h2>
             </div>
           </div>
-          {render(KineticFAQ, {accent: "#7e0607", textColor: "#fff"})}
+          <FaqSection items={faqs} />
         </section>
-        <section className="contact section-pad" id="contact">
+        <section className="contact section-pad" id="contact" aria-labelledby="contact-title">
+          <img className="contact-bg" src={ctaImage} alt="" aria-hidden="true" loading="lazy" decoding="async" />
           <p className="section-label">SEU CARRO MERECE ESSE CUIDADO</p>
-          <h2>Vamos cuidar?</h2>
-          <p>Fale com a PoliArt pelo WhatsApp.</p>
-          <a className="contact-button" href="https://wa.me/5516999756680" target="_blank" rel="noreferrer">
-            Falar pelo WhatsApp ↗
-          </a>
+          <h2 id="contact-title"><span>Vamos</span> <span>cuidar?</span></h2>
+          <div className="contact-actions">
+            <a className="btn btn--primary" href="https://wa.me/5516999756680" target="_blank" rel="noopener noreferrer">
+              Falar pelo WhatsApp ↗
+            </a>
+            <p>Fale com a PoliArt pelo WhatsApp.</p>
+          </div>
         </section>
       </main>
       <footer className="footer section-pad">

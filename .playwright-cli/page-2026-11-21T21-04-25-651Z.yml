@@ -1,0 +1,425 @@
+- generic [ref=f1e2]:
+  - button "Alternar som ambiente" [ref=f1e3] [cursor=pointer]:
+    - generic [ref=f1e4]: ♪
+    - generic [ref=f1e5]: som ambiente
+  - banner [ref=f1e6]:
+    - link "POLIART" [ref=f1e7] [cursor=pointer]:
+      - /url: "#top"
+    - navigation [ref=f1e8]:
+      - link "Serviços" [ref=f1e9] [cursor=pointer]:
+        - /url: "#services"
+      - link "Antes & depois" [ref=f1e10] [cursor=pointer]:
+        - /url: "#work"
+      - link "Preços" [ref=f1e11] [cursor=pointer]:
+        - /url: "#pricing"
+      - link "Contato" [ref=f1e12] [cursor=pointer]:
+        - /url: "#contact"
+    - link "WhatsApp ↗" [ref=f1e13] [cursor=pointer]:
+      - /url: https://wa.me/5516999756680
+  - main [ref=f1e14]:
+    - generic [ref=f1e15]:
+      - img "Hatch branco em estúdio escuro com fumaça e luz vermelhas" [ref=f1e16]
+      - generic [ref=f1e18]:
+        - paragraph [ref=f1e19]: POLIART · ESTÉTICA AUTOMOTIVA
+        - heading [level=1] [ref=f1e20]:
+          - generic "EXCÊLENCIA EM CADA DETALHE" [ref=f1e21]:
+            - generic [aria-hidden] [ref=f1e22]:
+              - generic [aria-hidden] [ref=f1e23]: E
+              - generic [aria-hidden] [ref=f1e24]: X
+              - generic [aria-hidden] [ref=f1e25]: C
+              - generic [aria-hidden] [ref=f1e26]: Ê
+              - generic [aria-hidden] [ref=f1e27]: L
+              - generic [aria-hidden] [ref=f1e28]: E
+              - generic [aria-hidden] [ref=f1e29]: "N"
+              - generic [aria-hidden] [ref=f1e30]: C
+              - generic [aria-hidden] [ref=f1e31]: I
+              - generic [aria-hidden] [ref=f1e32]: A
+            - generic [aria-hidden] [ref=f1e33]:
+              - generic [aria-hidden] [ref=f1e34]: E
+              - generic [aria-hidden] [ref=f1e35]: M
+            - generic [aria-hidden] [ref=f1e36]:
+              - generic [aria-hidden] [ref=f1e37]: C
+              - generic [aria-hidden] [ref=f1e38]: A
+              - generic [aria-hidden] [ref=f1e39]: D
+              - generic [aria-hidden] [ref=f1e40]: A
+            - generic [aria-hidden] [ref=f1e41]:
+              - generic [aria-hidden] [ref=f1e42]: D
+              - generic [aria-hidden] [ref=f1e43]: E
+              - generic [aria-hidden] [ref=f1e44]: T
+              - generic [aria-hidden] [ref=f1e45]: A
+              - generic [aria-hidden] [ref=f1e46]: L
+              - generic [aria-hidden] [ref=f1e47]: H
+              - generic [aria-hidden] [ref=f1e48]: E
+          - generic "SEMPRE" [ref=f1e49]:
+            - emphasis [ref=f1e50]:
+              - generic [aria-hidden] [ref=f1e51]:
+                - generic [aria-hidden] [ref=f1e52]: S
+                - generic [aria-hidden] [ref=f1e53]: E
+                - generic [aria-hidden] [ref=f1e54]: M
+                - generic [aria-hidden] [ref=f1e55]: P
+                - generic [aria-hidden] [ref=f1e56]: R
+                - generic [aria-hidden] [ref=f1e57]: E
+      - generic [ref=f1e58]:
+        - generic [ref=f1e59]: Floriano Peixoto, 212 / CentroJaboticabal — SP (Fundo)
+        - generic [ref=f1e60]: Carros & motosSeg–Sáb / 8h às 18h
+    - region "O QUE VOCÊ PRECISA?" [ref=f1e61]:
+      - generic [ref=f1e62]:
+        - generic [ref=f1e63]:
+          - paragraph [ref=f1e64]: SERVIÇOS
+          - heading "O QUE VOCÊ PRECISA?" [level=2] [ref=f1e65]: O QUE VOCÊPRECISA?
+        - paragraph [ref=f1e66]: Todos os serviços são feitos à mãoem nosso estúdio ou na sua casa.
+      - generic [ref=f1e67]:
+        - toolbar "Filtrar serviços" [ref=f1e68]:
+          - button "Todos" [pressed] [ref=f1e69] [cursor=pointer]
+          - button "Polimento" [ref=f1e70] [cursor=pointer]
+          - button "Lavagem" [ref=f1e71] [cursor=pointer]
+          - button "Restauração" [ref=f1e72] [cursor=pointer]
+          - button "Interior" [ref=f1e73] [cursor=pointer]
+          - button "Proteção" [ref=f1e74] [cursor=pointer]
+        - status [ref=f1e75]: 8 serviços
+        - list [ref=f1e76]:
+          - listitem [ref=f1e77]:
+            - article [ref=f1e78]:
+              - generic [ref=f1e79]:
+                - generic [ref=f1e80]: Mais procurado
+                - generic [ref=f1e85]: Foto do serviço
+              - generic [ref=f1e86]:
+                - generic [ref=f1e87]: Polimento
+                - generic [ref=f1e88]: 1–2 dias
+              - heading "Polimento técnico" [level=3] [ref=f1e89]
+              - paragraph [ref=f1e90]: Correção precisa para recuperar profundidade e brilho da pintura.
+          - listitem [ref=f1e91]:
+            - article [ref=f1e92]:
+              - generic [ref=f1e93]: Foto do serviço
+              - generic [ref=f1e99]:
+                - generic [ref=f1e100]: Polimento
+                - generic [ref=f1e101]: 1 dia
+              - heading "Polimento comercial" [level=3] [ref=f1e102]
+              - paragraph [ref=f1e103]: Acabamento rápido e uniforme para renovar a aparência do veículo.
+          - listitem [ref=f1e104]:
+            - article [ref=f1e105]:
+              - generic [ref=f1e106]: Foto do serviço
+              - generic [ref=f1e112]:
+                - generic [ref=f1e113]: Lavagem
+                - generic [ref=f1e114]: 3–4 horas
+              - heading "Lavagem técnica detalhada" [level=3] [ref=f1e115]
+              - paragraph [ref=f1e116]: Limpeza cuidadosa por dentro, por fora e em cada acabamento.
+          - listitem [ref=f1e117]:
+            - article [ref=f1e118]:
+              - generic [ref=f1e119]: Foto do serviço
+              - generic [ref=f1e125]:
+                - generic [ref=f1e126]: Lavagem
+                - generic [ref=f1e127]: 1–2 horas
+              - heading "Lavagem tradicional" [level=3] [ref=f1e128]
+              - paragraph [ref=f1e129]: O essencial bem feito para manter seu carro sempre pronto.
+          - listitem [ref=f1e130]:
+            - article [ref=f1e131]:
+              - generic [ref=f1e132]: Foto do serviço
+              - generic [ref=f1e138]:
+                - generic [ref=f1e139]: Lavagem
+                - generic [ref=f1e140]: 3 horas
+              - heading "Lavagem de chassi" [level=3] [ref=f1e141]
+              - paragraph [ref=f1e142]: Remoção profunda de resíduos nas partes inferiores do veículo.
+          - listitem [ref=f1e143]:
+            - article [ref=f1e144]:
+              - generic [ref=f1e145]: Foto do serviço
+              - generic [ref=f1e151]:
+                - generic [ref=f1e152]: Restauração
+                - generic [ref=f1e153]: 2 horas
+              - heading "Revitalização de faróis" [level=3] [ref=f1e154]
+              - paragraph [ref=f1e155]: Mais transparência, segurança e presença para o conjunto óptico.
+          - listitem [ref=f1e156]:
+            - article [ref=f1e157]:
+              - generic [ref=f1e158]: Foto do serviço
+              - generic [ref=f1e164]:
+                - generic [ref=f1e165]: Interior
+                - generic [ref=f1e166]: 4 horas
+              - heading "Higienização de bancos" [level=3] [ref=f1e167]
+              - paragraph [ref=f1e168]: Limpeza profunda dos tecidos, couro e superfícies internas.
+          - listitem [ref=f1e169]:
+            - article [ref=f1e170]:
+              - generic [ref=f1e171]:
+                - generic [ref=f1e172]: Premium
+                - generic [ref=f1e177]: Foto do serviço
+              - generic [ref=f1e178]:
+                - generic [ref=f1e179]: Proteção
+                - generic [ref=f1e180]: 1–2 dias
+              - heading "Vitrificação" [level=3] [ref=f1e181]
+              - paragraph [ref=f1e182]: Proteção de longa duração com brilho intenso e toque sedoso.
+    - region "A diferença é visível." [ref=f1e183]:
+      - generic [ref=f1e184]:
+        - generic [ref=f1e185]:
+          - paragraph [ref=f1e186]: 03 / ANTES & DEPOIS
+          - heading "A diferença é visível." [level=2] [ref=f1e187]: A diferençaé visível.
+        - paragraph [ref=f1e188]: Arraste para revelar o resultado.No celular, toque e deslize.
+      - generic [ref=f1e189]:
+        - article [ref=f1e190]:
+          - generic [ref=f1e191]:
+            - generic [ref=f1e192]: "01"
+            - strong [ref=f1e193]: Polimento técnico
+          - generic [ref=f1e194]:
+            - img "Polimento técnico, depois"
+            - generic [ref=f1e195]:
+              - img "Polimento técnico, antes"
+            - generic: Antes
+            - generic: Depois
+            - 'slider "Comparar antes e depois: Polimento técnico" [ref=f1e196]'
+        - article [ref=f1e199]:
+          - generic [ref=f1e200]:
+            - generic [ref=f1e201]: "02"
+            - strong [ref=f1e202]: Lavagem detalhada
+          - generic [ref=f1e203]:
+            - img "Lavagem detalhada, depois"
+            - generic [ref=f1e204]:
+              - img "Lavagem detalhada, antes"
+            - generic: Antes
+            - generic: Depois
+            - 'slider "Comparar antes e depois: Lavagem detalhada" [ref=f1e205]'
+        - article [ref=f1e208]:
+          - generic [ref=f1e209]:
+            - generic [ref=f1e210]: "03"
+            - strong [ref=f1e211]: Revitalização de faróis
+          - generic [ref=f1e212]:
+            - img "Revitalização de faróis, depois"
+            - generic [ref=f1e213]:
+              - img "Revitalização de faróis, antes"
+            - generic: Antes
+            - generic: Depois
+            - 'slider "Comparar antes e depois: Revitalização de faróis" [ref=f1e214]'
+        - article [ref=f1e217]:
+          - generic [ref=f1e218]:
+            - generic [ref=f1e219]: "04"
+            - strong [ref=f1e220]: Higienização de bancos
+          - generic [ref=f1e221]:
+            - img "Higienização de bancos, depois"
+            - generic [ref=f1e222]:
+              - img "Higienização de bancos, antes"
+            - generic: Antes
+            - generic: Depois
+            - 'slider "Comparar antes e depois: Higienização de bancos" [ref=f1e223]'
+        - article [ref=f1e226]:
+          - generic [ref=f1e227]:
+            - generic [ref=f1e228]: "05"
+            - strong [ref=f1e229]: Vitrificação
+          - generic [ref=f1e230]:
+            - img "Vitrificação, depois"
+            - generic [ref=f1e231]:
+              - img "Vitrificação, antes"
+            - generic: Antes
+            - generic: Depois
+            - 'slider "Comparar antes e depois: Vitrificação" [ref=f1e232]'
+    - region "Resultado que fala por si." [ref=f1e235]:
+      - generic [ref=f1e236]:
+        - paragraph [ref=f1e237]: 04 / NOSSO PADRÃO
+        - note [ref=f1e238]: Dados provisórios de exemplo
+        - heading "Resultado que fala por si." [level=2] [ref=f1e239]: Resultado quefala por si.
+        - paragraph [ref=f1e240]: Um cuidado consistente em cada serviço, para seu carro sair sempre melhor do que entrou.
+      - list [ref=f1e241]:
+        - listitem [ref=f1e242]:
+          - generic [ref=f1e262]:
+            - generic [ref=f1e263]: 800+
+            - generic [aria-hidden] [ref=f1e264]: 0+
+          - generic [ref=f1e265]: Carros atendidos
+        - listitem [ref=f1e266]:
+          - generic [ref=f1e286]:
+            - generic [ref=f1e287]: 4,9/5
+            - generic [aria-hidden] [ref=f1e288]: 0,0/5
+          - generic [ref=f1e289]: Avaliação média
+        - listitem [ref=f1e290]:
+          - generic [ref=f1e310]:
+            - generic [ref=f1e311]: 5 anos
+            - generic [aria-hidden] [ref=f1e312]: 0 anos
+          - generic [ref=f1e313]: Experiência
+        - listitem [ref=f1e314]:
+          - generic [ref=f1e334]:
+            - generic [ref=f1e335]: 100%
+            - generic [aria-hidden] [ref=f1e336]: 0%
+          - generic [ref=f1e337]: Feito à mão
+    - region "Monte seu cuidado ideal." [ref=f1e338]:
+      - generic [ref=f1e339]:
+        - generic [ref=f1e340]:
+          - paragraph [ref=f1e341]: 05 / PREÇOS
+          - heading "Monte seu cuidado ideal." [level=2] [ref=f1e342]: Monte seucuidado ideal.
+        - paragraph [ref=f1e343]: Escolha o tamanho do veículoe o serviço desejado.
+      - generic [ref=f1e344]:
+        - generic [ref=f1e345]:
+          - group "01 · Seu veículo" [ref=f1e346]:
+            - generic [ref=f1e348]:
+              - generic [ref=f1e349] [cursor=pointer]:
+                - radio "Hatch / Compacto"
+                - generic [ref=f1e350]: Hatch / Compacto
+              - generic [ref=f1e351] [cursor=pointer]:
+                - radio "Sedan" [checked]
+                - generic [ref=f1e352]: Sedan
+              - generic [ref=f1e353] [cursor=pointer]:
+                - radio "SUV / Picape"
+                - generic [ref=f1e354]: SUV / Picape
+              - generic [ref=f1e355] [cursor=pointer]:
+                - radio "Van / 7 lugares"
+                - generic [ref=f1e356]: Van / 7 lugares
+          - group "02 · Serviço" [ref=f1e357]:
+            - generic [ref=f1e359]:
+              - generic [ref=f1e360] [cursor=pointer]:
+                - radio "Polimento técnico Correção precisa para recuperar profundidade e brilho da pintura. R$ 180" [checked]
+                - generic [ref=f1e361]:
+                  - generic [ref=f1e362]: Polimento técnico
+                  - generic [ref=f1e363]: Correção precisa para recuperar profundidade e brilho da pintura.
+                - generic [ref=f1e364]: R$ 180
+              - generic [ref=f1e365] [cursor=pointer]:
+                - radio "Polimento comercial Acabamento rápido e uniforme para renovar a aparência do veículo. R$ 90"
+                - generic [ref=f1e366]:
+                  - generic [ref=f1e367]: Polimento comercial
+                  - generic [ref=f1e368]: Acabamento rápido e uniforme para renovar a aparência do veículo.
+                - generic [ref=f1e369]: R$ 90
+              - generic [ref=f1e370] [cursor=pointer]:
+                - radio "Lavagem técnica detalhada Limpeza cuidadosa por dentro, por fora e em cada acabamento. R$ 120"
+                - generic [ref=f1e371]:
+                  - generic [ref=f1e372]: Lavagem técnica detalhada
+                  - generic [ref=f1e373]: Limpeza cuidadosa por dentro, por fora e em cada acabamento.
+                - generic [ref=f1e374]: R$ 120
+              - generic [ref=f1e375] [cursor=pointer]:
+                - radio "Lavagem tradicional O essencial bem feito para manter seu carro sempre pronto. R$ 60"
+                - generic [ref=f1e376]:
+                  - generic [ref=f1e377]: Lavagem tradicional
+                  - generic [ref=f1e378]: O essencial bem feito para manter seu carro sempre pronto.
+                - generic [ref=f1e379]: R$ 60
+              - generic [ref=f1e380] [cursor=pointer]:
+                - radio "Lavagem de chassi Remoção profunda de resíduos nas partes inferiores do veículo. R$ 100"
+                - generic [ref=f1e381]:
+                  - generic [ref=f1e382]: Lavagem de chassi
+                  - generic [ref=f1e383]: Remoção profunda de resíduos nas partes inferiores do veículo.
+                - generic [ref=f1e384]: R$ 100
+              - generic [ref=f1e385] [cursor=pointer]:
+                - radio "Revitalização de faróis Mais transparência, segurança e presença para o conjunto óptico. R$ 130"
+                - generic [ref=f1e386]:
+                  - generic [ref=f1e387]: Revitalização de faróis
+                  - generic [ref=f1e388]: Mais transparência, segurança e presença para o conjunto óptico.
+                - generic [ref=f1e389]: R$ 130
+              - generic [ref=f1e390] [cursor=pointer]:
+                - radio "Higienização de bancos Limpeza profunda dos tecidos, couro e superfícies internas. R$ 180"
+                - generic [ref=f1e391]:
+                  - generic [ref=f1e392]: Higienização de bancos
+                  - generic [ref=f1e393]: Limpeza profunda dos tecidos, couro e superfícies internas.
+                - generic [ref=f1e394]: R$ 180
+              - generic [ref=f1e395] [cursor=pointer]:
+                - radio "Vitrificação Proteção de longa duração com brilho intenso e toque sedoso. R$ 450"
+                - generic [ref=f1e396]:
+                  - generic [ref=f1e397]: Vitrificação
+                  - generic [ref=f1e398]: Proteção de longa duração com brilho intenso e toque sedoso.
+                - generic [ref=f1e399]: R$ 450
+        - complementary "Resumo da estimativa" [ref=f1e400]:
+          - paragraph [ref=f1e401]: Estimativa
+          - paragraph [aria-hidden] [ref=f1e402]: R$ 180
+          - status [ref=f1e403]: "Estimativa: R$ 180, Polimento técnico, Sedan"
+          - paragraph [ref=f1e404]: Sedan · Polimento técnico
+          - link "Chamar no WhatsApp" [ref=f1e405] [cursor=pointer]:
+            - /url: https://wa.me/5516999756680?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%3A%20Polimento%20t%C3%A9cnico%20(Sedan).%20Estimativa%3A%20R%24%C2%A0180.
+          - paragraph [ref=f1e406]: Valor estimado. Confirmamos após avaliar o veículo.
+    - region "Quem cuida, recomenda." [ref=f1e407]:
+      - generic [ref=f1e409]:
+        - paragraph [ref=f1e410]: 06 / CLIENTES
+        - heading "Quem cuida, recomenda." [level=2] [ref=f1e411]: Quem cuida,recomenda.
+      - note [ref=f1e412]: Depoimentos de exemplo
+      - list [ref=f1e413]:
+        - listitem [ref=f1e414]:
+          - figure "Rafael M. Sedan prata" [ref=f1e415]:
+            - img "5 de 5 estrelas" [ref=f1e416]
+            - blockquote [ref=f1e427]: “Fiz o polimento técnico e a pintura voltou a ter brilho de carro novo.”
+            - generic [ref=f1e428]:
+              - generic [ref=f1e429]: Rafael M.
+              - generic [ref=f1e430]: Sedan prata
+        - listitem [ref=f1e431]:
+          - figure "Camila S. Hatch branco" [ref=f1e432]:
+            - img "5 de 5 estrelas" [ref=f1e433]
+            - blockquote [ref=f1e444]: “Os faróis estavam amarelados e ficaram transparentes de novo. A diferença é enorme.”
+            - generic [ref=f1e445]:
+              - generic [ref=f1e446]: Camila S.
+              - generic [ref=f1e447]: Hatch branco
+        - listitem [ref=f1e448]:
+          - figure "Eduardo L. SUV preto" [ref=f1e449]:
+            - img "5 de 5 estrelas" [ref=f1e450]
+            - blockquote [ref=f1e461]: “Higienizaram os bancos e o cheiro do carro mudou completamente.”
+            - generic [ref=f1e462]:
+              - generic [ref=f1e463]: Eduardo L.
+              - generic [ref=f1e464]: SUV preto
+        - listitem [ref=f1e465]:
+          - figure "Fernanda A. Sedan cinza" [ref=f1e466]:
+            - img "5 de 5 estrelas" [ref=f1e467]
+            - blockquote [ref=f1e478]: "“Atendimento claro: explicaram o que o carro precisava e o valor antes de começar.”"
+            - generic [ref=f1e479]:
+              - generic [ref=f1e480]: Fernanda A.
+              - generic [ref=f1e481]: Sedan cinza
+        - listitem [ref=f1e482]:
+          - figure "Lucas P. Moto esportiva" [ref=f1e483]:
+            - img "5 de 5 estrelas" [ref=f1e484]
+            - blockquote [ref=f1e495]: “Levei a moto para lavar e ficou impecável, até nos detalhes.”
+            - generic [ref=f1e496]:
+              - generic [ref=f1e497]: Lucas P.
+              - generic [ref=f1e498]: Moto esportiva
+        - listitem [ref=f1e499]:
+          - figure "Juliana R. Hatch vermelho" [ref=f1e500]:
+            - img "4 de 5 estrelas" [ref=f1e501]
+            - blockquote [ref=f1e512]: “Serviço muito bem feito. Só precisei esperar um pouco mais que o combinado.”
+            - generic [ref=f1e513]:
+              - generic [ref=f1e514]: Juliana R.
+              - generic [ref=f1e515]: Hatch vermelho
+    - region "07 / A EXPERIÊNCIA POLIART" [ref=f1e516]:
+      - paragraph [ref=f1e517]: 07 / A EXPERIÊNCIA POLIART
+      - paragraph [ref=f1e518]:
+        - generic [ref=f1e519]: Mais
+        - generic [ref=f1e520]: brilho.
+        - generic [ref=f1e521]: Mais
+        - generic [ref=f1e522]: proteção.
+        - generic [ref=f1e523]: Mais
+        - generic [ref=f1e524]: PoliArt.
+      - generic [ref=f1e525]: POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA · · POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA ·
+    - region "Tudo claro desde o começo." [ref=f1e530]:
+      - generic [ref=f1e532]:
+        - paragraph [ref=f1e533]: 08 / DÚVIDAS
+        - heading "Tudo claro desde o começo." [level=2] [ref=f1e534]: Tudo clarodesde o começo.
+      - list [ref=f1e535]:
+        - listitem [ref=f1e536]:
+          - heading [level=3] [ref=f1e537]:
+            - button "Onde fica a PoliArt e qual é o horário?" [expanded] [ref=f1e538] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e539]: "01"
+          - region "Onde fica a PoliArt e qual é o horário?" [ref=f1e542]:
+            - paragraph [ref=f1e544]: Floriano Peixoto, 212, Centro, Jaboticabal – SP (Fundo). Atendemos de segunda a sábado, das 8h às 18h.
+        - listitem [ref=f1e545]:
+          - heading [level=3] [ref=f1e546]:
+            - button "Vocês atendem carros e motos?" [ref=f1e547] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e548]: "02"
+          - region "Vocês atendem carros e motos?":
+            - paragraph [ref=f1e551]: Sim. Atendemos carros e motos.
+        - listitem [ref=f1e552]:
+          - heading [level=3] [ref=f1e553]:
+            - button "Quanto tempo leva cada serviço?" [ref=f1e554] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e555]: "03"
+          - region "Quanto tempo leva cada serviço?":
+            - paragraph [ref=f1e558]: A lavagem tradicional leva de 1 a 2 horas e a lavagem técnica detalhada, de 3 a 4 horas. O polimento técnico leva de 1 a 2 dias. A duração de cada serviço está na seção Serviços.
+        - listitem [ref=f1e559]:
+          - heading [level=3] [ref=f1e560]:
+            - button "Como faço para agendar?" [ref=f1e561] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e562]: "04"
+          - region "Como faço para agendar?":
+            - paragraph [ref=f1e565]: Pelo WhatsApp. Na seção Preços você escolhe o tamanho do veículo e o serviço, e o botão já abre a conversa com a sua escolha.
+        - listitem [ref=f1e566]:
+          - heading [level=3] [ref=f1e567]:
+            - button "O valor da estimativa é o preço final?" [ref=f1e568] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e569]: "05"
+          - region "O valor da estimativa é o preço final?":
+            - paragraph [ref=f1e572]: Não. É uma estimativa com base no tamanho do veículo e no serviço escolhido. O valor final é confirmado depois de avaliar o veículo.
+    - region "Vamos cuidar?" [ref=f1e573]:
+      - paragraph [ref=f1e575]: SEU CARRO MERECE ESSE CUIDADO
+      - heading "Vamos cuidar?" [level=2] [ref=f1e576]:
+        - generic [ref=f1e577]: Vamos
+        - generic [ref=f1e578]: cuidar?
+      - generic [ref=f1e579]:
+        - link "Falar pelo WhatsApp ↗" [ref=f1e580] [cursor=pointer]:
+          - /url: https://wa.me/5516999756680
+        - paragraph [ref=f1e581]: Fale com a PoliArt pelo WhatsApp.
+  - contentinfo [ref=f1e582]:
+    - link "POLIART" [ref=f1e583] [cursor=pointer]:
+      - /url: "#top"
+    - generic [ref=f1e584]: © 2026 POLIART · JABOTICABAL — SP
+    - link "@_poliart_ ↗" [ref=f1e585] [cursor=pointer]:
+      - /url: https://www.instagram.com/_poliart_/
