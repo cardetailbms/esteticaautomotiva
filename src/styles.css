@@ -9,8 +9,8 @@
     --gray: #a8a8a8;
     --red-deep: #7e0607;
 
-    /* Referência Ferrari + BMW M */
-    --red: #da291c;
+    /* Vermelho único PoliArt */
+    --red: #a31213;
     --canvas: #181818;
     --surface: #303030;
     --paper: #f4f4f4;
@@ -22,7 +22,6 @@
     --on-ink: var(--black);
     --muted: var(--gray);
     --line: rgba(255, 255, 255, .15);
-    --red-bright: #a31213;
     --mono: 'DM Mono', monospace;
 
     /* Tipografia */
@@ -54,7 +53,9 @@
 }
 
 html {
-    scroll-behavior: auto
+    scroll-behavior: auto;
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent
 }
 
 body {
@@ -62,6 +63,8 @@ body {
     background: #000;
     color: var(--ink)
 }
+
+a, button { touch-action: manipulation; }
 
 a {
     color: inherit
@@ -94,7 +97,7 @@ a {
 }
 
 .logo span {
-    color: var(--red-bright)
+    color: var(--red)
 }
 
 .site-nav nav {
@@ -161,7 +164,7 @@ a {
 
 .eyebrow,
 .hero-caption {
-    font: 10px var(--mono);
+    font: var(--t-label) var(--mono);
     letter-spacing: .12em;
     color: var(--muted)
 }
@@ -182,7 +185,7 @@ a {
 }
 
 .hero h1 em {
-    color: var(--red-bright);
+    color: var(--red);
     font-style: normal
 }
 
@@ -190,17 +193,6 @@ a {
     font-size: 14px;
     line-height: 1.7;
     color: #ddd
-}
-
-.hero-link {
-    display: inline-block;
-    margin-top: 22px;
-    font: 11px var(--mono);
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #fff;
-    border-bottom: 1px solid var(--red-bright);
-    padding-bottom: 9px
 }
 
 .hero-caption {
@@ -218,23 +210,8 @@ a {
     .hero-caption { flex-direction: column; gap: 12px; }
 }
 
-.eyebrow, .hero-caption { font-size: var(--t-label); }
-
-.statement {
-    border-top: 1px solid var(--line);
-    padding-top: 135px;
-    padding-bottom: 145px
-}
-
 .comparison-section { padding-top: var(--pad-y); padding-bottom: var(--pad-y); }
 
-.statement {
-    display: grid;
-    grid-template-columns: 1fr 2.3fr;
-    gap: 7vw
-}
-
-.statement h2,
 .section-head h2,
 .stats h2 {
     margin: 0
@@ -250,13 +227,11 @@ h2 {
     text-wrap: balance;
 }
 
-.statement h2 span,
 .section-head h2 span,
 .stats h2 span {
     color: var(--muted)
 }
 
-.statement>div>p,
 .stats-copy,
 .section-head>p {
     font-size: var(--t-body);
@@ -316,7 +291,7 @@ h2 {
     transition: background-color .2s, border-color .2s, color .2s;
 }
 .pb-size:hover { background: var(--ink); color: var(--on-ink); }
-.pb-size:has(input:checked) { background: var(--red-bright); border-color: var(--red-bright); color: var(--white); }
+.pb-size:has(input:checked) { background: var(--red); border-color: var(--red); color: var(--white); }
 .pb-size:has(input:focus-visible), .pb-row:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 3px; }
 
 .pb-list { border-bottom: 1px solid var(--line); }
@@ -342,8 +317,7 @@ h2 {
     line-height: 1; letter-spacing: var(--track-display); color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums;
 }
 .pb-summary-line { margin: 0; font-size: var(--t-body); line-height: 1.6; color: var(--muted); }
-.pb-summary .btn { width: 100%; background: var(--red-bright); }
-.pb-summary .btn:hover { background: var(--red-deep); }
+.pb-summary .btn { width: 100%; }
 .pb-foot { margin: 0; font-size: var(--t-label); line-height: 1.5; color: var(--muted); }
 
 .reviews { padding-top: var(--pad-y); padding-bottom: var(--pad-y); }
@@ -448,14 +422,16 @@ h2 {
   display: block; margin-top: var(--s-9); overflow: hidden; white-space: nowrap; text-decoration: none; text-transform: uppercase;
   font-family: var(--font-display); font-weight: var(--w-display); font-size: 25vw; line-height: .85; letter-spacing: var(--track-display); color: var(--ink);
 }
-.footer-wordmark span { color: var(--red-bright); }
-.footer-base { margin: var(--s-6) 0 0; padding-top: var(--s-5); border-top: 1px solid var(--line); font: 500 var(--t-label)/1.5 var(--mono); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); }
+.footer-wordmark span { color: var(--red); }
+.footer-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-3) var(--s-6); margin: var(--s-6) 0 0; padding-top: var(--s-5); border-top: 1px solid var(--line); font: 500 var(--t-label)/1.5 var(--mono); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--muted); }
+.footer-base a { color: inherit; text-decoration: none; }
+.footer-base a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 
 .sound-control {
     position: fixed;
     z-index: 30;
-    left: 22px;
-    bottom: 22px;
+    left: calc(22px + env(safe-area-inset-left));
+    bottom: calc(22px + env(safe-area-inset-bottom));
     display: inline-flex;
     justify-content: center;
     min-height: var(--btn-h);
@@ -512,21 +488,11 @@ h2 {
     .hero-caption {
         left: var(--gut);
         right: auto;
-        bottom: calc(22px + var(--btn-h) + 16px);
+        bottom: calc(22px + env(safe-area-inset-bottom) + var(--btn-h) + 16px);
         flex-direction: column;
         gap: 12px;
         text-align: left;
         font-size: var(--t-label)
-    }
-
-    .statement {
-        display: block;
-        padding-top: 95px;
-        padding-bottom: 100px
-    }
-
-    .statement>div>p {
-        margin-left: 0
     }
 
     .section-head {
@@ -560,7 +526,7 @@ h2 {
     left: 0;
     top: 0;
     white-space: nowrap;
-    color: var(--red-bright);
+    color: var(--red);
     visibility: hidden;
     will-change: transform
 }
@@ -583,13 +549,6 @@ h2 {
     color: var(--muted);
 }
 
-.statement>div>p,
-.stats-copy,
-.section-head>p {
-    font-size: var(--t-body);
-    line-height: 1.6;
-}
-
 .btn {
     display: inline-flex;
     align-items: center;
@@ -610,6 +569,8 @@ h2 {
 .btn--primary:hover { background: var(--red-deep); }
 .btn--secondary { background: transparent; color: var(--ink); border-color: var(--ink); }
 .btn--secondary:hover { background: var(--ink); color: var(--on-ink); }
+
+.btn:active, .svc-filter:active, .pb-size:active { opacity: .85; }
 
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 

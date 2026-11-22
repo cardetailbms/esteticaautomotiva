@@ -37,6 +37,8 @@ function Layer({img, dirty, accent, simulate}: {img?: Img; dirty: boolean; accen
         src={img.src}
         srcSet={img.srcSet}
         alt={img.alt || ""}
+        width={1366}
+        height={768}
         loading="lazy"
         decoding="async"
         draggable={false}
@@ -272,7 +274,7 @@ VantaBeforeAfter.defaultProps = {
   start: 50,
   introSweep: true,
   radius: 0,
-  accent: "#da291c",
+  accent: "#a31213",
   labelColor: "#fff",
   labelBg: "#000",
   lineWidth: 2,

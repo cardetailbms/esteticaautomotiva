@@ -284,7 +284,7 @@ function App() {
         <AudioControl />
       </>
       <header className="site-nav">
-        <a className="logo" href="#top">
+        <a className="logo" href="#top" translate="no">
           POLI<span>ART</span>
         </a>
         <nav aria-label="Principal">
@@ -331,7 +331,7 @@ function App() {
         <section className="services section-pad on-paper" id="services" aria-labelledby="services-title">
           <div className="section-head">
             <div>
-              <p className="section-label">SERVIÇOS</p>
+              <p className="section-label">02 / SERVIÇOS</p>
               <h2 id="services-title">
                 O QUE VOCÊ
                 <br />
@@ -378,7 +378,7 @@ function App() {
                   label: item.title,
                   beforeLabel: "Antes",
                   afterLabel: "Depois",
-                  accent: "#da291c",
+                  accent: "#a31213",
                   radius: 0,
                   lineWidth: 2,
                   labelColor: "#fff",
@@ -406,7 +406,7 @@ function App() {
             columns: 4,
             phoneColumns: 2,
             gap: 32,
-            accent: "#da291c",
+            accent: "#a31213",
             textColor: "#111",
             mutedColor: "#5c5c5c",
             trackColor: "rgba(0, 0, 0, .14)",
@@ -459,14 +459,14 @@ function App() {
             tracking: 0.01,
             font: { fontFamily: "var(--font-display)", fontWeight: 900, textTransform: "uppercase" },
             color: "#fff",
-            accent: "#da291c",
+            accent: "#a31213",
           })}
           <div className="sensory-tread">
             {render(VantaTread, {
               text: "POLIART · ESTÉTICA AUTOMOTIVA · POLIART · ESTÉTICA AUTOMOTIVA ·",
               rubber: "#000",
               groove: "#303030",
-              textColor: "#da291c",
+              textColor: "#a31213",
               font: { fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 26, letterSpacing: "3px" },
             })}
           </div>
@@ -485,7 +485,7 @@ function App() {
           <FaqSection items={faqs} />
         </section>
         <section className="contact section-pad" id="contact" aria-labelledby="contact-title">
-          <img className="contact-bg" src={ctaImage} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+          <img className="contact-bg" src={ctaImage} alt="" aria-hidden="true" loading="lazy" decoding="async" width={1366} height={768} />
           <p className="section-label">SEU CARRO MERECE ESSE CUIDADO</p>
           <h2 id="contact-title"><span>Vamos</span> <span>cuidar?</span></h2>
           <div className="contact-actions">
@@ -528,8 +528,11 @@ function App() {
             </ul>
           </div>
         </div>
-        <a className="footer-wordmark" href="#top" aria-label="PoliArt, voltar ao topo">POLI<span>ART</span></a>
-        <p className="footer-base">© 2026 POLIART · JABOTICABAL — SP</p>
+        <a className="footer-wordmark" href="#top" aria-label="PoliArt, voltar ao topo" translate="no">POLI<span>ART</span></a>
+        <div className="footer-base">
+          <span>© 2026 POLIART · JABOTICABAL — SP</span>
+          <a href="https://www.instagram.com/bms_trafego/" target="_blank" rel="noopener noreferrer">Design by BMS · @bms_trafego ↗</a>
+        </div>
       </footer>
     </>
   );

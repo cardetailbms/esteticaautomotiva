@@ -286,7 +286,7 @@ VantaSpeedo.defaultProps = {
   duration: 2.2,
   textColor: "#111",
   mutedColor: "#5c5c5c",
-  accent: "#da291c",
+  accent: "#a31213",
   trackColor: "rgba(0,0,0,.14)",
 };
 

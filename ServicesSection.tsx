@@ -80,7 +80,7 @@ export default function ServicesSection({services}: ServicesSectionProps) {
               <div className="svc-media">
                 {service.badge ? <span className="svc-badge">{service.badge}</span> : null}
                 {service.image ? (
-                  <img src={service.image.src} alt={service.image.alt} loading="lazy" decoding="async" />
+                  <img src={service.image.src} alt={service.image.alt} width={800} height={800} loading="lazy" decoding="async" />
                 ) : (
                   <div className="svc-ph" aria-hidden="true">
                     <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
