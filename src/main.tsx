@@ -10,7 +10,7 @@ import PricingBuilder from "../PricingBuilder";
 import VantaSpeedo from "../VantaSpeedo";
 import VantaTread from "../VantaTread";
 import ServicesSection from "../ServicesSection";
-import ReviewsSection from "../ReviewsSection";
+import ReviewsCarousel from "../ReviewsCarousel";
 import FaqSection from "../FaqSection";
 
 type Component = React.ComponentType<any> & {defaultProps?: Record<string, unknown>};
@@ -82,20 +82,42 @@ const comparisons: {title: string; before?: {src: string; alt: string}; after?: 
   {title: "Higienização de bancos"},
   {title: "Vitrificação"},
 ];
-const packages = services.map((s, i) => ({
-  name: s.title,
-  price: [180, 90, 120, 60, 100, 130, 180, 450][i],
-  note: s.blurb,
-}));
-
+const pricesByVehicle = [
+  [600, 800, 1300],
+  [250, 350, 550],
+  [120, 150, 220],
+  [65, 55, 85],
+  [160, 140, 220],
+  [180, 150, 200],
+  [200, 250, 400],
+  [1000, 1400, 2500],
+];
+const packages = services.map((service, index) => {
+  const [hatch, sedan, suvPicape] = pricesByVehicle[index];
+  return {
+    name: service.title,
+    prices: [hatch, sedan, suvPicape, Math.round(sedan * 1.4)],
+    note: service.blurb,
+  };
+});
 // ATENÇÃO: depoimentos de EXEMPLO. Substituir por avaliações REAIS de clientes da PoliArt (ex.: Google) antes de publicar.
-const reviews = [
-  { quote: "Fiz o polimento técnico e a pintura voltou a ter brilho de carro novo.", name: "Rafael M.", car: "Sedan prata", rating: 5 },
-  { quote: "Os faróis estavam amarelados e ficaram transparentes de novo. A diferença é enorme.", name: "Camila S.", car: "Hatch branco", rating: 5 },
-  { quote: "Higienizaram os bancos e o cheiro do carro mudou completamente.", name: "Eduardo L.", car: "SUV preto", rating: 5 },
-  { quote: "Atendimento claro: explicaram o que o carro precisava e o valor antes de começar.", name: "Fernanda A.", car: "Sedan cinza", rating: 5 },
-  { quote: "Levei a moto para lavar e ficou impecável, até nos detalhes.", name: "Lucas P.", car: "Moto esportiva", rating: 5 },
-  { quote: "Serviço muito bem feito. Só precisei esperar um pouco mais que o combinado.", name: "Juliana R.", car: "Hatch vermelho", rating: 4 },
+// ATENÇÃO: depoimentos de EXEMPLO. Substituir por avaliações REAIS de clientes da PoliArt (ex.: Google) antes de publicar.
+const testimonials = [
+  {id: 1, service: "Polimento técnico", name: "Rafael M.", car: "Sedan prata", rating: 5, quote: "A pintura estava opaca e cheia de micro riscos. Saiu do polimento com brilho de carro novo."},
+  {id: 2, service: "Lavagem técnica detalhada", name: "Camila S.", car: "Hatch branco", rating: 5, quote: "Lavagem caprichada, até nos cantinhos que ninguém olha. O carro voltou outro."},
+  {id: 3, service: "Revitalização de faróis", name: "Eduardo L.", car: "SUV preto", rating: 5, quote: "Os faróis estavam amarelados e ficaram transparentes. A diferença à noite é enorme."},
+  {id: 4, service: "Higienização de bancos", name: "Fernanda A.", car: "Sedan cinza", rating: 5, quote: "Higienizaram os bancos e o cheiro do carro mudou completamente. Ficou limpo de verdade."},
+  {id: 5, service: "Vitrificação", name: "Marcos T.", car: "SUV branco", rating: 5, quote: "Fiz a vitrificação e agora a sujeira sai bem mais fácil na lavagem. Brilho muito bonito."},
+  {id: 6, service: "Polimento técnico", name: "Juliana R.", car: "Hatch vermelho", rating: 5, quote: "Expliquei o que me incomodava na pintura e eles resolveram. Resultado acima do que eu esperava."},
+  {id: 7, service: "Lavagem técnica detalhada", name: "Lucas P.", car: "Moto esportiva", rating: 5, quote: "Levei a moto para lavar e ficou impecável, até nas rodas e nos detalhes."},
+  {id: 8, service: "Revitalização de faróis", name: "Patrícia N.", car: "Hatch prata", rating: 4, quote: "Serviço bem feito. Os faróis ficaram claros de novo, só demorou um pouco mais que o combinado."},
+  {id: 9, service: "Higienização de bancos", name: "André C.", car: "SUV cinza", rating: 5, quote: "Banco de tecido com mancha antiga de criança. Saiu quase tudo e ficou ótimo."},
+  {id: 10, service: "Vitrificação", name: "Beatriz F.", car: "Sedan preto", rating: 5, quote: "Atendimento claro: explicaram o processo e o valor antes de começar. Acabamento lindo."},
+  {id: 11, service: "Polimento técnico", name: "Thiago V.", car: "Coupé azul", rating: 5, quote: "Tinha riscos de lavagem por todo o capô. Depois do polimento, quase não aparecem mais."},
+  {id: 12, service: "Lavagem técnica detalhada", name: "Renata G.", car: "Minivan prata", rating: 4, quote: "Lavagem bem feita e preço justo. A agenda estava cheia, mas valeu esperar."},
+  {id: 13, service: "Revitalização de faróis", name: "Gustavo H.", car: "Picape preta", rating: 5, quote: "Faróis novos sem trocar nada. Valeu cada centavo, e o carro ganhou outra cara."},
+  {id: 14, service: "Higienização de bancos", name: "Larissa M.", car: "Hatch preto", rating: 5, quote: "Meu carro tinha cheiro de cachorro. Depois da higienização, nem parece o mesmo carro."},
+  {id: 15, service: "Vitrificação", name: "Diego B.", car: "Moto naked", rating: 5, quote: "Fiz na moto e o brilho impressiona. Fica fácil de limpar e a pintura parece protegida."},
 ];
 
 // CONFIRMAR com o cliente: respostas baseadas só em dados já presentes no site. Acrescentar o que for verdade (ex.: atendimento na casa do cliente).
@@ -110,27 +132,29 @@ const faqs = [
   },
   {
     question: "Quanto tempo leva cada serviço?",
-    answer: "A lavagem tradicional leva de 1 a 2 horas e a lavagem técnica detalhada, de 3 a 4 horas. O polimento técnico leva de 1 a 2 dias. A duração de cada serviço está na seção Serviços.",
+    answer:
+      "A lavagem tradicional leva de 1 a 2 horas e a lavagem técnica detalhada, de 3 a 4 horas. O polimento técnico leva de 1 a 2 dias. A duração de cada serviço está na seção Serviços.",
   },
   {
     question: "Como faço para agendar?",
-    answer: "Pelo WhatsApp. Na seção Preços você escolhe o tamanho do veículo e o serviço, e o botão já abre a conversa com a sua escolha.",
+    answer:
+      "Pelo WhatsApp. Na seção Preços você escolhe o tamanho do veículo e o serviço, e o botão já abre a conversa com a sua escolha.",
   },
   {
     question: "O valor da estimativa é o preço final?",
-    answer: "Não. É uma estimativa com base no tamanho do veículo e no serviço escolhido. O valor final é confirmado depois de avaliar o veículo.",
+    answer:
+      "Não. É uma estimativa com base no tamanho do veículo e no serviço escolhido. O valor final é confirmado depois de avaliar o veículo.",
   },
 ];
 
 // TROCAR por /image/cta.jpg (foto de gotas de água sobre pintura escura, com luz vermelha) quando existir.
 const ctaImage = "/image/hero.jpg";
 
-// CONFIRMAR com o cliente: preços dos serviços (packages) e multiplicadores por tamanho de veículo.
 const sizes = [
-  {label: "Hatch / Compacto", factor: 0.9},
-  {label: "Sedan", factor: 1},
-  {label: "SUV / Picape", factor: 1.2},
-  {label: "Van / 7 lugares", factor: 1.4},
+  {label: "Hatch / Compacto"},
+  {label: "Sedan"},
+  {label: "SUV / Picape"},
+  {label: "Van / 7 lugares"},
 ];
 
 // ATENÇÃO: valores PROVISÓRIOS de exemplo. Substituir pelos números reais da PoliArt antes de publicar.
@@ -142,6 +166,63 @@ const stats = [
 ];
 
 gsap.registerPlugin(SplitText);
+
+function SectionTitleEffects() {
+  useEffect(() => {
+    const headings = Array.from(document.querySelectorAll<HTMLElement>("main h2"));
+    const cleanups: Array<() => void> = [];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({target, isIntersecting}) => {
+          if (!isIntersecting) return;
+          const heading = target as HTMLElement;
+          observer.unobserve(heading);
+          heading.classList.add("multi-cursor");
+          heading.dataset.effect = "multi-cursor";
+          const split = SplitText.create(heading, {type: "words, chars", wordsClass: "word", charsClass: "char"});
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            gsap.set(split.chars, {opacity: 1});
+            cleanups.push(() => split.revert());
+            return;
+          }
+          const layer = document.createElement("div");
+          layer.className = "cursors";
+          layer.setAttribute("aria-hidden", "true");
+          const cursor = document.createElement("span");
+          cursor.className = "cursor";
+          const bar = document.createElement("span");
+          bar.className = "cursor__bar";
+          cursor.append(bar);
+          layer.append(cursor);
+          heading.append(layer);
+          const box = heading.getBoundingClientRect();
+          const chars = split.chars;
+          gsap.set(chars, {opacity: 0});
+          const timeline = gsap.timeline({delay: 0.2});
+          chars.forEach((char) => {
+            const rect = char.getBoundingClientRect();
+            timeline
+              .set(cursor, {autoAlpha: 1, x: rect.left - box.left, y: rect.top - box.top})
+              .set(char, {opacity: 1}, ">+=0.07");
+          });
+          timeline.to(cursor, {autoAlpha: 0, duration: 0.2});
+          cleanups.push(() => {
+            gsap.killTweensOf([cursor, bar, ...chars]);
+            layer.remove();
+            split.revert();
+          });
+        });
+      },
+      {threshold: 0.12, rootMargin: "0px 0px -12% 0px"},
+    );
+    headings.forEach((heading) => observer.observe(heading));
+    return () => {
+      observer.disconnect();
+      cleanups.forEach((cleanup) => cleanup());
+    };
+  }, []);
+  return null;
+}
 
 function MultiCursorTitle() {
   const root = useRef<HTMLHeadingElement>(null);
@@ -258,18 +339,44 @@ function AudioControl() {
   const toggle = () => {
     const el = audio.current;
     if (!el || unavailable) return;
-    if (el.paused) el.play().then(() => setOn(true)).catch(() => undefined);
-    else { el.pause(); setOn(false); }
+    if (el.paused)
+      el.play()
+        .then(() => setOn(true))
+        .catch(() => undefined);
+    else {
+      el.pause();
+      setOn(false);
+    }
   };
   return (
     <>
       <audio ref={audio} loop preload="metadata" src="/audio/car-wash.mp3" onError={() => setUnavailable(true)} />
-      <button type="button" className="sound-control" onClick={toggle} aria-pressed={on} disabled={unavailable}
+      <button
+        type="button"
+        className="sound-control"
+        onClick={toggle}
+        aria-pressed={on}
+        aria-label={on ? "Desativar som ambiente" : "Ativar som ambiente"}
+        disabled={unavailable}
         title={unavailable ? "Som ambiente em breve" : undefined}>
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          {on ? <path d="M8 5v14M16 5v14" /> : <><path d="M9 18V5l11-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="17" cy="16" r="3" /></>}
+        <svg
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden="true">
+          <path d="M4 10v4h3l5 4V6l-5 4H4Z" />
+          {on ? (
+            <>
+              <path d="M15 9a5 5 0 0 1 0 6" />
+              <path d="M17.5 6.5a9 9 0 0 1 0 11" />
+            </>
+          ) : (
+            <path d="m16 9 5 6m0-6-5 6" />
+          )}
         </svg>
-        <span>Som ambiente</span>
       </button>
     </>
   );
@@ -278,10 +385,18 @@ function AudioControl() {
 function App() {
   return (
     <>
-      <a className="skip-link" href="#top">Pular para o conteúdo</a>
+      <a className="skip-link" href="#top">
+        Pular para o conteúdo
+      </a>
       <>
-        {render(KineticSmoothScroll)}
-        <AudioControl />
+        {render(KineticSmoothScroll, {
+          smoothness: 92,
+          wheelSpeed: 85,
+          anchorDuration: 1.5,
+          onPhones: true,
+          touchFollow: 32,
+          touchMomentum: 80,
+        })}
       </>
       <header className="site-nav">
         <a className="logo" href="#top" translate="no">
@@ -298,6 +413,7 @@ function App() {
         </a>
       </header>
       <main id="top">
+        <SectionTitleEffects />
         <section className="hero">
           <img
             className="hero-image"
@@ -309,6 +425,7 @@ function App() {
             decoding="async"
           />
           <div className="hero-shade" />
+          <AudioControl />
           <div className="hero-content">
             <p className="eyebrow">POLIART · ESTÉTICA AUTOMOTIVA</p>
             <MultiCursorTitle />
@@ -331,7 +448,7 @@ function App() {
         <section className="services section-pad on-paper" id="services" aria-labelledby="services-title">
           <div className="section-head">
             <div>
-              <p className="section-label">02 / SERVIÇOS</p>
+              <p className="section-label">SERVIÇOS</p>
               <h2 id="services-title">
                 O QUE VOCÊ
                 <br />
@@ -351,7 +468,7 @@ function App() {
         <section className="comparison-section section-pad" id="work" aria-labelledby="work-title">
           <div className="section-head">
             <div>
-              <p className="section-label">03 / ANTES & DEPOIS</p>
+              <p className="section-label">ANTES & DEPOIS</p>
               <h2 id="work-title">
                 A diferença
                 <br />
@@ -383,7 +500,12 @@ function App() {
                   lineWidth: 2,
                   labelColor: "#fff",
                   labelBg: "#000",
-                  labelFont: {fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: "1.5px"},
+                  labelFont: {
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: 13,
+                    fontWeight: 500,
+                    letterSpacing: "1.5px",
+                  },
                   style: {width: "100%", aspectRatio: "1 / 1", height: "auto"},
                 })}
               </article>
@@ -392,10 +514,13 @@ function App() {
         </section>
         <section className="stats section-pad on-paper" aria-labelledby="standard-title">
           <div className="stats-head">
-            <p className="section-label">04 / NOSSO PADRÃO</p>
-            <p className="stats-note" role="note">Dados provisórios de exemplo</p>
+            <p className="stats-note" role="note">
+              Dados provisórios de exemplo
+            </p>
             <h2 id="standard-title">
-              Resultado que<br /><span>fala por si.</span>
+              Resultado que
+              <br />
+              <span>fala por si.</span>
             </h2>
             <p className="stats-copy">
               Um cuidado consistente em cada serviço, para seu carro sair sempre melhor do que entrou.
@@ -410,14 +535,25 @@ function App() {
             textColor: "#111",
             mutedColor: "#5c5c5c",
             trackColor: "rgba(0, 0, 0, .14)",
-            numberFont: {fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "clamp(32px, 4.2vw, 56px)", letterSpacing: "1px", lineHeight: 1},
-            labelFont: {fontFamily: "var(--mono)", fontSize: 13, fontWeight: 500, letterSpacing: "1.5px", lineHeight: 1.4},
+            numberFont: {
+              fontFamily: "var(--font-display)",
+              fontWeight: 900,
+              fontSize: "clamp(32px, 4.2vw, 56px)",
+              letterSpacing: "1px",
+              lineHeight: 1,
+            },
+            labelFont: {
+              fontFamily: "var(--mono)",
+              fontSize: 13,
+              fontWeight: 500,
+              letterSpacing: "1.5px",
+              lineHeight: 1.4,
+            },
           })}
         </section>
         <section className="pricing section-pad" id="pricing" aria-labelledby="pricing-title">
           <div className="section-head">
             <div>
-              <p className="section-label">05 / PREÇOS</p>
               <h2 id="pricing-title">
                 Monte seu
                 <br />
@@ -447,17 +583,21 @@ function App() {
               </h2>
             </div>
           </div>
-          <p className="reviews-note" role="note">Depoimentos de exemplo</p>
-          <ReviewsSection reviews={reviews} />
+          <p className="reviews-note" role="note">
+            Depoimentos de exemplo
+          </p>
+          <ReviewsCarousel items={testimonials} />
         </section>
         <section className="sensory section-pad" aria-labelledby="sensory-label">
-          <p className="section-label" id="sensory-label">07 / A EXPERIÊNCIA POLIART</p>
+          <p className="section-label" id="sensory-label">
+            A EXPERIÊNCIA POLIART
+          </p>
           {render(KineticScrollFill, {
             text: "Mais brilho. Mais proteção. Mais *PoliArt.*",
             size: "clamp(40px, 6.4vw, 92px)",
             lineHeight: 1,
             tracking: 0.01,
-            font: { fontFamily: "var(--font-display)", fontWeight: 900, textTransform: "uppercase" },
+            font: {fontFamily: "var(--font-display)", fontWeight: 900, textTransform: "uppercase"},
             color: "#fff",
             accent: "#a31213",
           })}
@@ -467,14 +607,14 @@ function App() {
               rubber: "#000",
               groove: "#303030",
               textColor: "#a31213",
-              font: { fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 26, letterSpacing: "3px" },
+              font: {fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 26, letterSpacing: "3px"},
             })}
           </div>
         </section>
         <section className="faq section-pad on-paper" id="faq" aria-labelledby="faq-title">
           <div className="section-head">
             <div>
-              <p className="section-label">08 / DÚVIDAS</p>
+              <p className="section-label">DÚVIDAS</p>
               <h2 id="faq-title">
                 Tudo claro
                 <br />
@@ -485,11 +625,26 @@ function App() {
           <FaqSection items={faqs} />
         </section>
         <section className="contact section-pad" id="contact" aria-labelledby="contact-title">
-          <img className="contact-bg" src={ctaImage} alt="" aria-hidden="true" loading="lazy" decoding="async" width={1366} height={768} />
+          <img
+            className="contact-bg"
+            src={ctaImage}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            width={1366}
+            height={768}
+          />
           <p className="section-label">SEU CARRO MERECE ESSE CUIDADO</p>
-          <h2 id="contact-title"><span>Vamos</span> <span>cuidar?</span></h2>
+          <h2 id="contact-title">
+            <span>Vamos</span> <span>cuidar?</span>
+          </h2>
           <div className="contact-actions">
-            <a className="btn btn--primary" href="https://wa.me/5516999756680" target="_blank" rel="noopener noreferrer">
+            <a
+              className="btn btn--primary"
+              href="https://wa.me/5516999756680"
+              target="_blank"
+              rel="noopener noreferrer">
               Falar pelo WhatsApp ↗
             </a>
             <p>Fale com a PoliArt pelo WhatsApp.</p>
@@ -501,37 +656,59 @@ function App() {
           <nav aria-label="Rodapé">
             <p className="footer-title">Explorar</p>
             <ul>
-              <li><a href="#services">Serviços</a></li>
-              <li><a href="#work">Antes &amp; depois</a></li>
-              <li><a href="#pricing">Preços</a></li>
-              <li><a href="#contact">Contato</a></li>
+              <li>
+                <a href="#services">Serviços</a>
+              </li>
+              <li>
+                <a href="#work">Antes &amp; depois</a>
+              </li>
+              <li>
+                <a href="#pricing">Preços</a>
+              </li>
+              <li>
+                <a href="#contact">Contato</a>
+              </li>
             </ul>
           </nav>
           <div>
             <p className="footer-title">Contato</p>
             <ul>
-              <li><a href="https://wa.me/5516999756680" target="_blank" rel="noopener noreferrer">(16) 99975-6680</a></li>
+              <li>
+                <a href="https://wa.me/5516999756680" target="_blank" rel="noopener noreferrer">
+                  (16) 99975-6680
+                </a>
+              </li>
             </ul>
           </div>
           <div>
             <p className="footer-title">Estúdio</p>
             <address>
-              Floriano Peixoto, 212<br />
-              Centro, Jaboticabal — SP (Fundo)<br />
+              Floriano Peixoto, 212
+              <br />
+              Centro, Jaboticabal — SP (Fundo)
+              <br />
               Seg–Sáb · 8h às 18h
             </address>
           </div>
           <div>
             <p className="footer-title">Seguir</p>
             <ul>
-              <li><a href="https://www.instagram.com/_poliart_/" target="_blank" rel="noopener noreferrer">@_poliart_ ↗</a></li>
+              <li>
+                <a href="https://www.instagram.com/_poliart_/" target="_blank" rel="noopener noreferrer">
+                  @_poliart_ ↗
+                </a>
+              </li>
             </ul>
           </div>
         </div>
-        <a className="footer-wordmark" href="#top" aria-label="PoliArt, voltar ao topo" translate="no">POLI<span>ART</span></a>
+        <a className="footer-wordmark" href="#top" aria-label="PoliArt, voltar ao topo" translate="no">
+          POLI<span>ART</span>
+        </a>
         <div className="footer-base">
           <span>© 2026 POLIART · JABOTICABAL — SP</span>
-          <a href="https://www.instagram.com/bms_trafego/" target="_blank" rel="noopener noreferrer">Design by BMS · @bms_trafego ↗</a>
+          <a href="https://www.instagram.com/bms_trafego/" target="_blank" rel="noopener noreferrer">
+            Design by BMS · @bms_trafego ↗
+          </a>
         </div>
       </footer>
     </>

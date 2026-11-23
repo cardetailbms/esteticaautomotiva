@@ -4,7 +4,7 @@ type QA = { question: string; answer: string };
 
 export default function FaqSection({ items }: { items: QA[] }) {
   const uid = useId();
-  const [open, setOpen] = useState<number | null>(0); // uma por vez; a primeira começa aberta
+  const [open, setOpen] = useState<number | null>(0);
   return (
     <ul className="faq-list" role="list">
       {items.map((qa, i) => {

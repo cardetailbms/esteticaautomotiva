@@ -1,7 +1,7 @@
 import * as React from "react";
 
-type Size = {label: string; factor: number};
-type Pack = {name: string; price: number; note: string};
+type Size = {label: string};
+type Pack = {name: string; prices: number[]; note: string};
 
 type Props = {
   sizes: Size[];
@@ -46,7 +46,7 @@ export default function PricingBuilder({sizes, packages, whatsapp, footnote}: Pr
   const id = React.useId();
   const [size, setSize] = React.useState(1);
   const [pack, setPack] = React.useState(0);
-  const total = Math.round(packages[pack].price * sizes[size].factor);
+  const total = packages[pack].prices[size];
   const [reduceMotion, setReduceMotion] = React.useState(() =>
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
@@ -86,7 +86,7 @@ export default function PricingBuilder({sizes, packages, whatsapp, footnote}: Pr
                   <span className="pb-row-name">{k.name}</span>
                   <span className="pb-row-note">{k.note}</span>
                 </span>
-                <span className="pb-row-price">{money(k.price * sizes[size].factor)}</span>
+                <span className="pb-row-price">{money(k.prices[size])}</span>
               </label>
             ))}
           </div>
