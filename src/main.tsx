@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import {createRoot} from "react-dom/client";
 import {gsap} from "gsap";
 import {SplitText} from "gsap/SplitText";
@@ -103,59 +103,166 @@ const packages = services.map((service, index) => {
 // ATENÇÃO: depoimentos de EXEMPLO. Substituir por avaliações REAIS de clientes da PoliArt (ex.: Google) antes de publicar.
 // ATENÇÃO: depoimentos de EXEMPLO. Substituir por avaliações REAIS de clientes da PoliArt (ex.: Google) antes de publicar.
 const testimonials = [
-  {id: 1, service: "Polimento técnico", name: "Rafael M.", car: "Sedan prata", rating: 5, quote: "A pintura estava opaca e cheia de micro riscos. Saiu do polimento com brilho de carro novo."},
-  {id: 2, service: "Lavagem técnica detalhada", name: "Camila S.", car: "Hatch branco", rating: 5, quote: "Lavagem caprichada, até nos cantinhos que ninguém olha. O carro voltou outro."},
-  {id: 3, service: "Revitalização de faróis", name: "Eduardo L.", car: "SUV preto", rating: 5, quote: "Os faróis estavam amarelados e ficaram transparentes. A diferença à noite é enorme."},
-  {id: 4, service: "Higienização de bancos", name: "Fernanda A.", car: "Sedan cinza", rating: 5, quote: "Higienizaram os bancos e o cheiro do carro mudou completamente. Ficou limpo de verdade."},
-  {id: 5, service: "Vitrificação", name: "Marcos T.", car: "SUV branco", rating: 5, quote: "Fiz a vitrificação e agora a sujeira sai bem mais fácil na lavagem. Brilho muito bonito."},
-  {id: 6, service: "Polimento técnico", name: "Juliana R.", car: "Hatch vermelho", rating: 5, quote: "Expliquei o que me incomodava na pintura e eles resolveram. Resultado acima do que eu esperava."},
-  {id: 7, service: "Lavagem técnica detalhada", name: "Lucas P.", car: "Moto esportiva", rating: 5, quote: "Levei a moto para lavar e ficou impecável, até nas rodas e nos detalhes."},
-  {id: 8, service: "Revitalização de faróis", name: "Patrícia N.", car: "Hatch prata", rating: 4, quote: "Serviço bem feito. Os faróis ficaram claros de novo, só demorou um pouco mais que o combinado."},
-  {id: 9, service: "Higienização de bancos", name: "André C.", car: "SUV cinza", rating: 5, quote: "Banco de tecido com mancha antiga de criança. Saiu quase tudo e ficou ótimo."},
-  {id: 10, service: "Vitrificação", name: "Beatriz F.", car: "Sedan preto", rating: 5, quote: "Atendimento claro: explicaram o processo e o valor antes de começar. Acabamento lindo."},
-  {id: 11, service: "Polimento técnico", name: "Thiago V.", car: "Coupé azul", rating: 5, quote: "Tinha riscos de lavagem por todo o capô. Depois do polimento, quase não aparecem mais."},
-  {id: 12, service: "Lavagem técnica detalhada", name: "Renata G.", car: "Minivan prata", rating: 4, quote: "Lavagem bem feita e preço justo. A agenda estava cheia, mas valeu esperar."},
-  {id: 13, service: "Revitalização de faróis", name: "Gustavo H.", car: "Picape preta", rating: 5, quote: "Faróis novos sem trocar nada. Valeu cada centavo, e o carro ganhou outra cara."},
-  {id: 14, service: "Higienização de bancos", name: "Larissa M.", car: "Hatch preto", rating: 5, quote: "Meu carro tinha cheiro de cachorro. Depois da higienização, nem parece o mesmo carro."},
-  {id: 15, service: "Vitrificação", name: "Diego B.", car: "Moto naked", rating: 5, quote: "Fiz na moto e o brilho impressiona. Fica fácil de limpar e a pintura parece protegida."},
+  {
+    id: 1,
+    service: "Polimento técnico",
+    name: "Rafael M.",
+    car: "Sedan prata",
+    rating: 5,
+    quote: "A pintura estava opaca e cheia de micro riscos. Saiu do polimento com brilho de carro novo.",
+  },
+  {
+    id: 2,
+    service: "Lavagem técnica detalhada",
+    name: "Camila S.",
+    car: "Hatch branco",
+    rating: 5,
+    quote: "Lavagem caprichada, até nos cantinhos que ninguém olha. O carro voltou outro.",
+  },
+  {
+    id: 3,
+    service: "Revitalização de faróis",
+    name: "Eduardo L.",
+    car: "SUV preto",
+    rating: 5,
+    quote: "Os faróis estavam amarelados e ficaram transparentes. A diferença à noite é enorme.",
+  },
+  {
+    id: 4,
+    service: "Higienização de bancos",
+    name: "Fernanda A.",
+    car: "Sedan cinza",
+    rating: 5,
+    quote: "Higienizaram os bancos e o cheiro do carro mudou completamente. Ficou limpo de verdade.",
+  },
+  {
+    id: 5,
+    service: "Vitrificação",
+    name: "Marcos T.",
+    car: "SUV branco",
+    rating: 5,
+    quote: "Fiz a vitrificação e agora a sujeira sai bem mais fácil na lavagem. Brilho muito bonito.",
+  },
+  {
+    id: 6,
+    service: "Polimento técnico",
+    name: "Juliana R.",
+    car: "Hatch vermelho",
+    rating: 5,
+    quote: "Expliquei o que me incomodava na pintura e eles resolveram. Resultado acima do que eu esperava.",
+  },
+  {
+    id: 7,
+    service: "Lavagem técnica detalhada",
+    name: "Lucas P.",
+    car: "Moto esportiva",
+    rating: 5,
+    quote: "Levei a moto para lavar e ficou impecável, até nas rodas e nos detalhes.",
+  },
+  {
+    id: 8,
+    service: "Revitalização de faróis",
+    name: "Patrícia N.",
+    car: "Hatch prata",
+    rating: 4,
+    quote: "Serviço bem feito. Os faróis ficaram claros de novo, só demorou um pouco mais que o combinado.",
+  },
+  {
+    id: 9,
+    service: "Higienização de bancos",
+    name: "André C.",
+    car: "SUV cinza",
+    rating: 5,
+    quote: "Banco de tecido com mancha antiga de criança. Saiu quase tudo e ficou ótimo.",
+  },
+  {
+    id: 10,
+    service: "Vitrificação",
+    name: "Beatriz F.",
+    car: "Sedan preto",
+    rating: 5,
+    quote: "Atendimento claro: explicaram o processo e o valor antes de começar. Acabamento lindo.",
+  },
+  {
+    id: 11,
+    service: "Polimento técnico",
+    name: "Thiago V.",
+    car: "Coupé azul",
+    rating: 5,
+    quote: "Tinha riscos de lavagem por todo o capô. Depois do polimento, quase não aparecem mais.",
+  },
+  {
+    id: 12,
+    service: "Lavagem técnica detalhada",
+    name: "Renata G.",
+    car: "Minivan prata",
+    rating: 4,
+    quote: "Lavagem bem feita e preço justo. A agenda estava cheia, mas valeu esperar.",
+  },
+  {
+    id: 13,
+    service: "Revitalização de faróis",
+    name: "Gustavo H.",
+    car: "Picape preta",
+    rating: 5,
+    quote: "Faróis novos sem trocar nada. Valeu cada centavo, e o carro ganhou outra cara.",
+  },
+  {
+    id: 14,
+    service: "Higienização de bancos",
+    name: "Larissa M.",
+    car: "Hatch preto",
+    rating: 5,
+    quote: "Meu carro tinha cheiro de cachorro. Depois da higienização, nem parece o mesmo carro.",
+  },
+  {
+    id: 15,
+    service: "Vitrificação",
+    name: "Diego B.",
+    car: "Moto naked",
+    rating: 5,
+    quote: "Fiz na moto e o brilho impressiona. Fica fácil de limpar e a pintura parece protegida.",
+  },
 ];
 
-// CONFIRMAR com o cliente: respostas baseadas só em dados já presentes no site. Acrescentar o que for verdade (ex.: atendimento na casa do cliente).
 const faqs = [
   {
-    question: "Onde fica a PoliArt e qual é o horário?",
-    answer: "Floriano Peixoto, 212, Centro, Jaboticabal – SP (Fundo). Atendemos de segunda a sábado, das 8h às 18h.",
-  },
-  {
-    question: "Vocês atendem carros e motos?",
-    answer: "Sim. Atendemos carros e motos.",
-  },
-  {
-    question: "Quanto tempo leva cada serviço?",
+    question: "O polimento automotivo consegue remover riscos e recuperar o brilho da pintura?",
     answer:
-      "A lavagem tradicional leva de 1 a 2 horas e a lavagem técnica detalhada, de 3 a 4 horas. O polimento técnico leva de 1 a 2 dias. A duração de cada serviço está na seção Serviços.",
+      "Sim! O polimento remove ou ameniza riscos superficiais, manchas e marcas de lavagem. Riscos profundos, que atingem a tinta ou o primer, podem exigir outros procedimentos.",
+  },
+
+  {
+    question: "Quanto tempo dura a revitalização dos faróis?",
+    answer:
+      "A durabilidade depende do estado dos faróis e da proteção aplicada. Com uma revitalização adequada e proteção UV, o resultado pode durar de vários meses a alguns anos.",
   },
   {
-    question: "Como faço para agendar?",
+    question: "A higienização de bancos remove manchas, mau cheiro e sujeiras profundas?",
     answer:
-      "Pelo WhatsApp. Na seção Preços você escolhe o tamanho do veículo e o serviço, e o botão já abre a conversa com a sua escolha.",
+      "Sim! O procedimento utiliza produtos e equipamentos específicos para remover sujeiras, manchas e odores. O resultado depende do tipo de tecido e das condições da mancha.",
   },
   {
-    question: "O valor da estimativa é o preço final?",
+    question: "Quanto tempo demora para secar os bancos após a higienização?",
     answer:
-      "Não. É uma estimativa com base no tamanho do veículo e no serviço escolhido. O valor final é confirmado depois de avaliar o veículo.",
+      "Geralmente, a secagem leva de 2 a 6 horas, dependendo do tecido, da umidade e da ventilação. Em alguns casos, pode demorar um pouco mais.",
+  },
+  {
+    question: "O que é vitrificação automotiva e quanto tempo dura a proteção?",
+    answer:
+      "É um tratamento que cria uma camada protetora sobre a pintura, preservando o brilho e facilitando a limpeza. Sua durabilidade varia conforme o produto e os cuidados de manutenção.",
+  },
+  {
+    question: "Preciso fazer polimento antes de realizar a vitrificação?",
+    answer:
+      "Não necessariamente. Porém, se a pintura apresentar riscos, manchas ou perda de brilho, o polimento é recomendado antes da aplicação para melhorar o resultado.",
   },
 ];
 
 // TROCAR por /image/cta.jpg (foto de gotas de água sobre pintura escura, com luz vermelha) quando existir.
 const ctaImage = "/image/hero.jpg";
 
-const sizes = [
-  {label: "Hatch / Compacto"},
-  {label: "Sedan"},
-  {label: "SUV / Picape"},
-  {label: "Van / 7 lugares"},
-];
+const sizes = [{label: "Hatch / Compacto"}, {label: "Sedan"}, {label: "SUV / Picape"}, {label: "Van / 7 lugares"}];
 
 // ATENÇÃO: valores PROVISÓRIOS de exemplo. Substituir pelos números reais da PoliArt antes de publicar.
 const stats = [
@@ -332,56 +439,6 @@ function MultiCursorTitle() {
   );
 }
 
-function AudioControl() {
-  const audio = useRef<HTMLAudioElement>(null);
-  const [on, setOn] = useState(false);
-  const [unavailable, setUnavailable] = useState(false);
-  const toggle = () => {
-    const el = audio.current;
-    if (!el || unavailable) return;
-    if (el.paused)
-      el.play()
-        .then(() => setOn(true))
-        .catch(() => undefined);
-    else {
-      el.pause();
-      setOn(false);
-    }
-  };
-  return (
-    <>
-      <audio ref={audio} loop preload="metadata" src="/audio/car-wash.mp3" onError={() => setUnavailable(true)} />
-      <button
-        type="button"
-        className="sound-control"
-        onClick={toggle}
-        aria-pressed={on}
-        aria-label={on ? "Desativar som ambiente" : "Ativar som ambiente"}
-        disabled={unavailable}
-        title={unavailable ? "Som ambiente em breve" : undefined}>
-        <svg
-          viewBox="0 0 24 24"
-          width="18"
-          height="18"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          aria-hidden="true">
-          <path d="M4 10v4h3l5 4V6l-5 4H4Z" />
-          {on ? (
-            <>
-              <path d="M15 9a5 5 0 0 1 0 6" />
-              <path d="M17.5 6.5a9 9 0 0 1 0 11" />
-            </>
-          ) : (
-            <path d="m16 9 5 6m0-6-5 6" />
-          )}
-        </svg>
-      </button>
-    </>
-  );
-}
-
 function App() {
   return (
     <>
@@ -399,9 +456,11 @@ function App() {
         })}
       </>
       <header className="site-nav">
-        <a className="logo" href="#top" translate="no">
-          POLI<span>ART</span>
-        </a>
+        <div className="site-brand">
+          <a className="logo" href="#top" translate="no">
+            POLI<span>ART</span>
+          </a>
+        </div>
         <nav aria-label="Principal">
           <a href="#services">Serviços</a>
           <a href="#work">Antes & depois</a>
@@ -425,14 +484,13 @@ function App() {
             decoding="async"
           />
           <div className="hero-shade" />
-          <AudioControl />
           <div className="hero-content">
             <p className="eyebrow">POLIART · ESTÉTICA AUTOMOTIVA</p>
             <MultiCursorTitle />
           </div>
           <div className="hero-caption">
             <span>
-              Floriano Peixoto, 212 / Centro
+              Rua Floriano Peixoto, 212 / Centro
               <br />
               Jaboticabal — SP (Fundo)
             </span>
@@ -575,7 +633,7 @@ function App() {
         <section className="reviews section-pad on-paper" aria-labelledby="reviews-title">
           <div className="section-head">
             <div>
-              <p className="section-label">06 / CLIENTES</p>
+              <p className="section-label">CLIENTES</p>
               <h2 id="reviews-title">
                 Quem cuida,
                 <br />
@@ -637,7 +695,7 @@ function App() {
           />
           <p className="section-label">SEU CARRO MERECE ESSE CUIDADO</p>
           <h2 id="contact-title">
-            <span>Vamos</span> <span>cuidar?</span>
+            <span>Vamos</span> <span>Agendar?</span>
           </h2>
           <div className="contact-actions">
             <a
@@ -647,7 +705,7 @@ function App() {
               rel="noopener noreferrer">
               Falar pelo WhatsApp ↗
             </a>
-            <p>Fale com a PoliArt pelo WhatsApp.</p>
+            <p>Ainda temos agenda para esse fim de ano.</p>
           </div>
         </section>
       </main>
