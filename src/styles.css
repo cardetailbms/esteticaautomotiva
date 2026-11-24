@@ -66,6 +66,13 @@ html {
     -webkit-tap-highlight-color: transparent
 }
 
+html,
+body,
+#root {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     margin: 0;
     background: #000;
@@ -222,7 +229,7 @@ a {
 
 .hero h1 {
     font-family: 'Barlow Condensed', sans-serif;
-    width: 110%;
+    width: 100%;
     max-width: none;
     font-size: clamp(54px, 7.1vw, 117px);
     line-height: .88;
@@ -895,6 +902,12 @@ h2[data-effect='multi-cursor'] {
 
     .rvs-quote {
         font-size: var(--t-body);
+    }
+}
+
+@media (max-width: 360px) {
+    .pb-row-name {
+        font-size: clamp(18px, 5.8vw, 20px);
     }
 }
 
